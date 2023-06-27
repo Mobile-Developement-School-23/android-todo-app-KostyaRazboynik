@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="toDoItem"
+            type="com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:paddingVertical="5dp"
+        android:sendDataToUpdateFragment="@{toDoItem}">
+
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkbox"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+
+            android:parsePriorityBackground="@{toDoItem.priority}"
+            android:checked="@{toDoItem.done}"
+            android:changeDoneFlag="@{toDoItem}"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:parseTitleCardTextColor="@{toDoItem}"
+            android:layout_toEndOf="@id/checkbox"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textSize="11sp"
+            android:visibility="gone" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+
+            android:gravity="start"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:text="@{toDoItem.title}"
+            android:textSize="16sp"
+            android:parseTitleCardTextColor="@{toDoItem.done}"
+            android:sendDataToUpdateFragment="@{toDoItem}"
+
+            android:layout_toStartOf="@id/info"
+            android:layout_toEndOf="@id/checkbox" />
+
+        <ImageView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/info_image_description"
+            android:src="@drawable/info_outline"
+            android:textSize="11sp" />
+
+    </RelativeLayout>
+</layout>

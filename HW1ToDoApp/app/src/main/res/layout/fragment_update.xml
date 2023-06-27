@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="args"
+            type="com.konstantinmuzhik.hw1todoapp.fragments.update.UpdateFragmentArgs" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+
+        android:background="?attr/colorPrimaryVariant"
+        tools:context=".fragments.update.UpdateFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/Theme.HW1ToDoApp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="24dp">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorSecondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/close"
+                app:navigationIconTint="?attr/colorOnSecondary">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_save_create"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:text="@string/save"
+                    android:textColor="@color/color_light_blue"
+                    app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp">
+
+                <EditText
+                    android:id="@+id/current_title_et"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+
+                    android:background="@drawable/tasks_background"
+                    android:elevation="2dp"
+                    android:gravity="top|start"
+
+                    android:importantForAutofill="no"
+                    android:hint="@string/task_title"
+                    android:inputType="textMultiLine"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
+                    android:text="@{args.currentItem.title}"
+                    android:minLines="6"
+                    android:padding="8dp"
+
+                    android:textColorHint="?attr/colorOnPrimary"
+                    android:textCursorDrawable="?attr/colorOnPrimary"
+                    android:textSize="@dimen/title"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/current_priority_et"
+
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="20dp"
+
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+
+                    android:gravity="start"
+                    android:text="@string/priority"
+                    android:textColor="?attr/colorOnSecondary"
+                    android:textSize="@dimen/meta"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.666"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/current_title_et" />
+
+                <Spinner
+                    android:id="@+id/current_priority_sp"
+
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginHorizontal="20dp"
+
+
+                    android:parsePriorityToInt="@{args.currentItem.priority}"
+                    android:entries="@array/priorities"
+                    android:textSize="@dimen/body"
+                    android:textColor="@color/color_light_gray"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/current_priority_et" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/first_separator_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:dividerThickness="0.5dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/color_light_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/current_priority_sp" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/current_deadline_sw"
+
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="20dp"
+
+                    android:text="@string/do_until"
+                    android:textSize="@dimen/meta"
+                    android:hasDeadline="@{args.currentItem.deadline}"
+                    android:theme="@style/Switch"
+                    android:textColor="?attr/colorOnSecondary"
+
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/first_separator_line" />
+
+                <TextView
+                    android:id="@+id/current_deadline_date"
+
+                    android:layout_width="0dp"
+                    android:layout_height="17dp"
+                    android:layout_marginStart="20dp"
+
+
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+
+                    android:textColor="@color/color_light_blue"
+                    android:textSize="@dimen/body"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/current_deadline_sw" />
+
+                <com.google.android.material.divider.MaterialDivider
+
+                    android:id="@+id/second_separator_line"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:dividerThickness="0.5dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@color/color_light_gray"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/current_deadline_date" />
+
+                <TextView
+                    android:id="@+id/creation_date"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="20dp"
+
+
+                    android:hint="@string/creation_date"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/body"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/second_separator_line" />
+
+                <TextView
+                    android:id="@+id/last_change_date"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="20dp"
+
+                    android:hint="@string/last_change_date"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/body"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/creation_date" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/end_separator_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:dividerThickness="0.5dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/color_light_gray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/last_change_date" />
+
+
+                <TextView
+                    android:id="@+id/button_delete_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawablePadding="12dp"
+                    android:padding="5dp"
+                    android:text="@string/delete"
+                    android:backgroundTint="@color/color_light_red"
+                    android:textColor="@color/color_light_red"
+                    android:textSize="@dimen/title"
+                    app:drawableLeftCompat="@drawable/delete"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/end_separator_line" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
