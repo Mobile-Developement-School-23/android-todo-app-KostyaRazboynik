@@ -6,14 +6,10 @@ import android.widget.AdapterView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import com.konstantinmuzhik.hw1todoapp.R
-import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 
 
 class SharedViewModel(application: Application) : AndroidViewModel(application) {
-
-    val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val spinnerListener = object :
         AdapterView.OnItemSelectedListener {
@@ -54,10 +50,6 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         }
 
         override fun onNothingSelected(parent: AdapterView<*>?) {}
-    }
-
-    fun isDatabaseEmpty(toDoData: List<ToDoItem>) {
-        emptyDatabase.value = toDoData.isEmpty()
     }
 
     fun verifyDataFromUser(title: String) = title.isNotEmpty()

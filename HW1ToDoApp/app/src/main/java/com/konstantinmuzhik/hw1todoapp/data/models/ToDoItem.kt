@@ -1,22 +1,36 @@
 package com.konstantinmuzhik.hw1todoapp.data.models
 
 import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
 import kotlinx.parcelize.Parcelize
+import java.util.Calendar
 import java.util.Date
 
-@Entity(tableName = "todo_table")
 @Parcelize
-@TypeConverters(Converter::class)
 data class ToDoItem(
-    @PrimaryKey
-    val id: String,
-    val title: String,
-    val priority: Priority,
-    val deadline: Date?,
+    var id: String,
+    var title: String,
+    var priority: Priority,
+    var deadline: Date?,
     var done: Boolean,
     val creationDate: Date,
-    val changeDate: Date?
-) : Parcelable
+    var changeDate: Date?
+) : Parcelable {
+
+    constructor() : this(
+        "-1", "", Priority.NO, null, false, Calendar.getInstance().time, Calendar.getInstance().time
+    )
+
+    fun setArgs(
+        title: String,
+        priority: Priority,
+        deadline: Date?,
+        done: Boolean,
+        changeDate: Date?
+    ) {
+        this.title = title
+        this.priority = priority
+        this.deadline = deadline
+        this.done = done
+        this.changeDate = changeDate
+    }
+}

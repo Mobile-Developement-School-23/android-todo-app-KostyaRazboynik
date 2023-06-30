@@ -54,4 +54,5 @@
             android:name="currentItem"
             app:argType="com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem" />
     </fragment>
+
 </navigation>

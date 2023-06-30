@@ -19,6 +19,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [YANDEX_CLIENT_ID: "0d0970774e284fa8ba9ff70b6b06479a"]
+
     }
 
     buildTypes {
@@ -46,6 +49,11 @@ android {
 
 dependencies {
 
+    def room_version = "2.5.2"
+    def nav_version = "2.6.0"
+    def ktor_version = "2.3.1"
+
+
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
@@ -56,10 +64,23 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    // Work manager
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+
+    // Yandex authSDK
+    implementation "com.yandex.android:authsdk:2.5.1"
+
+    //Datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //DI
+    implementation 'com.google.dagger:hilt-android:2.44'
+    kapt 'com.google.dagger:hilt-compiler:2.44'
+
     // Room components
-    implementation "androidx.room:room-runtime:2.5.2"
-    implementation "androidx.room:room-ktx:2.5.2"
-    kapt "androidx.room:room-compiler:2.5.2"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     // Lifecycle components
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
@@ -72,17 +93,18 @@ dependencies {
     kapt "androidx.databinding:databinding-common:8.0.2"
 
     // Navigation Component
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Kotlin Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
-    implementation "com.airbnb.android:lottie:3.4.0"
+    // Lottie animation
+    implementation "com.airbnb.android:lottie:6.0.1"
     implementation 'com.daimajia.androidanimations:library:2.4@aar'
 
-
+    //
     implementation 'com.github.javafaker:javafaker:1.0.2'
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.4'
 
@@ -90,10 +112,21 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
-    implementation "com.squareup.okhttp3:okhttp:4.10.0"
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:okhttp:4.11.0"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
+
+    //Ktor
+    implementation "io.ktor:ktor-client-core:$ktor_version"
+    implementation "io.ktor:ktor-client-cio:$ktor_version"
+    implementation "io.ktor:ktor-client-content-negotiation:$ktor_version"
+    implementation "io.ktor:ktor-serialization-kotlinx-json:$ktor_version"
+    implementation "org.slf4j:slf4j-nop:2.0.7"
 
     // Jackson
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.11.1'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
 
 }
