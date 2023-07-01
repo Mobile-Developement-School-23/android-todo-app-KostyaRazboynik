@@ -2,7 +2,9 @@ package com.konstantinmuzhik.hw1todoapp.fragments.add
 
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -11,22 +13,27 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.konstantinmuzhik.hw1todoapp.R
 import com.konstantinmuzhik.hw1todoapp.data.models.Priority
+import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 import com.konstantinmuzhik.hw1todoapp.data.viewmodel.ToDoItemViewModel
 import com.konstantinmuzhik.hw1todoapp.databinding.FragmentAddBinding
 import com.konstantinmuzhik.hw1todoapp.factory
 import com.konstantinmuzhik.hw1todoapp.fragments.SharedViewModel
+import com.konstantinmuzhik.hw1todoapp.utils.internet_checker.ConnectivityObserver
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.util.*
-import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem as ToDoItem
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+import java.util.UUID
 
 
 class AddFragment : Fragment() {
-    private var _binding: FragmentAddBinding? = null
-    private val binding get() = _binding!!
+
+    private lateinit var binding: FragmentAddBinding
 
     private val mToDoViewModel: ToDoItemViewModel by activityViewModels { factory() }
     private val mSharedViewModel: SharedViewModel by viewModels()
+
+    private var currentToDoItem = ToDoItem()
 
     private var deadlineDate: Date? = null
     private var deadlineChanged = false
@@ -34,6 +41,10 @@ class AddFragment : Fragment() {
     private val datePicker =
         MaterialDatePicker.Builder.datePicker().setTheme(R.style.MaterialCalendarTheme).build()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = FragmentAddBinding.inflate(layoutInflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,20 +52,9 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentAddBinding.inflate(inflater, container, false)
+        createListeners()
 
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        createListeners()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun createListeners() {
@@ -66,10 +66,14 @@ class AddFragment : Fragment() {
         }
 
         binding.toolbar.setNavigationOnClickListener {
+            mToDoViewModel.clearToDoItem()
             findNavController().popBackStack()
         }
 
         datePicker.addOnNegativeButtonClickListener {
+            if (deadlineDate == null) deleteDate()
+        }
+        datePicker.addOnCancelListener {
             if (deadlineDate == null) deleteDate()
         }
 
@@ -83,9 +87,7 @@ class AddFragment : Fragment() {
                 binding.deadlineDate.text =
                     SimpleDateFormat("d MMMM y", Locale.getDefault()).format(Date())
                 showDateTimePicker()
-            } else {
-                deleteDate()
-            }
+            } else deleteDate()
         }
     }
 
@@ -125,36 +127,40 @@ class AddFragment : Fragment() {
         }
 
     private fun createToDoItem() {
-        val name = binding.titleEt.text.toString()
+        val title = binding.titleEt.text.toString()
         val time = Calendar.getInstance().time
 
-        if (mSharedViewModel.verifyDataFromUser(name)) {
-            mToDoViewModel.createItem(
-                ToDoItem(
-                    id = LocalDateTime.now().toString(),
-                    title = name,
-                    priority = parsePriorityString(binding.prioritySp.selectedItem.toString()),
-                    deadline = if (deadlineChanged) deadlineDate else null,
-                    done = false,
-                    creationDate = time,
-                    changeDate = time
-                )
-            )
+        currentToDoItem.setArgs(
+            title = title,
+            priority = parsePriorityString(binding.prioritySp.selectedItem.toString()),
+            deadline = if (deadlineChanged) deadlineDate else null,
+            done = false,
+            changeDate = time
+        )
+
+        if (mSharedViewModel.verifyDataFromUser(currentToDoItem.title)) {
+            if (mToDoViewModel.status.value == ConnectivityObserver.Status.Available)
+                mToDoViewModel.updateRemoteToDoItem(currentToDoItem)
+//            else {
+//                Toast.makeText(
+//                    context,
+//                    R.string.no_network_will_be_created_later,
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+            currentToDoItem.id = UUID.randomUUID().toString()
+            mToDoViewModel.createToDoItem(currentToDoItem)
 
             Toast.makeText(
-                requireContext(),
-                getString(R.string.successfully_added),
-                Toast.LENGTH_SHORT
+                requireContext(), getString(R.string.successfully_added), Toast.LENGTH_SHORT
             ).show()
+
+            mToDoViewModel.clearToDoItem()
 
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
 
-        } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.fill_title),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        } else
+            Toast.makeText(requireContext(), getString(R.string.fill_title), Toast.LENGTH_SHORT)
+                .show()
     }
 }

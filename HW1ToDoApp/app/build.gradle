@@ -74,8 +74,8 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     //DI
-    implementation 'com.google.dagger:hilt-android:2.44'
-    kapt 'com.google.dagger:hilt-compiler:2.44'
+//    implementation 'com.google.dagger:hilt-android:2.44'
+//    kapt 'com.google.dagger:hilt-compiler:2.44'
 
     // Room components
     implementation "androidx.room:room-runtime:$room_version"
@@ -101,11 +101,12 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     // Lottie animation
-    implementation "com.airbnb.android:lottie:6.0.1"
-    implementation 'com.daimajia.androidanimations:library:2.4@aar'
+//    implementation "com.airbnb.android:lottie:6.0.1"
+//    implementation 'com.daimajia.androidanimations:library:2.4@aar'
 
     //
-    implementation 'com.github.javafaker:javafaker:1.0.2'
+//    implementation 'com.github.javafaker:javafaker:1.0.2'
+    // swipe decorator
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.4'
 
     // Retrofit
@@ -117,14 +118,14 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
 
     //Ktor
-    implementation "io.ktor:ktor-client-core:$ktor_version"
-    implementation "io.ktor:ktor-client-cio:$ktor_version"
-    implementation "io.ktor:ktor-client-content-negotiation:$ktor_version"
-    implementation "io.ktor:ktor-serialization-kotlinx-json:$ktor_version"
-    implementation "org.slf4j:slf4j-nop:2.0.7"
+//    implementation "io.ktor:ktor-client-core:$ktor_version"
+//    implementation "io.ktor:ktor-client-cio:$ktor_version"
+//    implementation "io.ktor:ktor-client-content-negotiation:$ktor_version"
+//    implementation "io.ktor:ktor-serialization-kotlinx-json:$ktor_version"
+//    implementation "org.slf4j:slf4j-nop:2.0.7"
 
     // Jackson
-    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.11.1'
+//    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.11.1'
 
     // Gson
     implementation 'com.google.code.gson:gson:2.10.1'

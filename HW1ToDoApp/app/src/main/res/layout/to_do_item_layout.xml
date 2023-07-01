@@ -22,19 +22,23 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/date"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_gravity="center"
         android:layout_marginTop="6dp"
-        android:layout_toEndOf="@id/checkbox"
+        android:layout_gravity="center"
+
         android:ellipsize="end"
         android:maxLines="3"
         android:textSize="11sp"
-        android:visibility="gone" />
+        android:visibility="gone"
+
+        android:layout_below="@id/title"
+        android:layout_toEndOf="@id/checkbox" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -49,13 +53,15 @@
 
     <ImageView
         android:id="@+id/info"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="10dp"
-        android:contentDescription="@string/info_image_description"
-        android:src="@drawable/info_outline"
+
+        android:importantForAccessibility="no"
+        android:src="@drawable/info"
         android:textSize="11sp" />
 
 </RelativeLayout>

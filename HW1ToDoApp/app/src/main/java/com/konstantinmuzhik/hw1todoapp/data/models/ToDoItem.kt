@@ -17,7 +17,13 @@ data class ToDoItem(
 ) : Parcelable {
 
     constructor() : this(
-        "-1", "", Priority.NO, null, false, Calendar.getInstance().time, Calendar.getInstance().time
+        "-1",
+        "",
+        Priority.NO,
+        null,
+        false,
+        Calendar.getInstance().time,
+        Calendar.getInstance().time
     )
 
     fun setArgs(

@@ -13,18 +13,24 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:fitsSystemWindows="true"
         android:theme="@style/Theme.HW1ToDoApp"
+
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="24dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+
             android:background="?attr/colorSecondary"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/close"
@@ -32,12 +38,15 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_save_create"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+
                 android:background="?android:attr/selectableItemBackground"
                 android:text="@string/create"
                 android:textColor="@color/color_light_blue"
+
                 app:layout_constraintBottom_toBottomOf="@+id/toolbar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,12 +58,15 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:paddingBottom="20dp">
 
             <EditText
@@ -93,7 +105,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="20dp"
 
-
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
 
@@ -127,13 +138,17 @@
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/first_separator_line"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:dividerThickness="0.5dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
+
+                app:dividerThickness="0.5dp"
+
                 android:background="@color/color_light_gray"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/priority_sp" />
@@ -150,7 +165,6 @@
                 android:textSize="@dimen/meta"
                 android:theme="@style/Switch"
                 android:textColor="?attr/colorOnSecondary"
-
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -176,14 +190,17 @@
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/end_separator_line"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:dividerThickness="0.5dp"
                 android:layout_marginTop="16dp"
+
+                app:dividerThickness="0.5dp"
+
                 android:background="@color/color_light_gray"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/deadline_date" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

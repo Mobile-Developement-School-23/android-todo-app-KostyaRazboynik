@@ -41,5 +41,10 @@
         <item name="colorPrimary">@color/color_dark_blue</item>
     </style>
 
+    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
 
 </resources>
