@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="?attr/colorPrimaryVariant"
+
+    tools:context=".ui.view.fragments.add.AddFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:fitsSystemWindows="true"
+        android:theme="@style/Theme.HW1ToDoApp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="24dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+
+            android:background="?attr/colorSecondary"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/close"
+            app:navigationIconTint="?attr/colorOnSecondary">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_save_create"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/create"
+                android:textColor="@color/color_light_blue"
+
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingBottom="20dp">
+
+            <EditText
+                android:id="@+id/title_et"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+
+                android:background="@drawable/tasks_background"
+                android:elevation="2dp"
+                android:gravity="top|start"
+
+                android:importantForAutofill="no"
+                android:hint="@string/task_title"
+                android:inputType="textMultiLine"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:minLines="6"
+                android:padding="8dp"
+
+                android:textColorHint="?attr/colorOnPrimary"
+                android:textCursorDrawable="?attr/colorOnPrimary"
+                android:textSize="@dimen/title"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"  />
+
+
+            <TextView
+                android:id="@+id/priority_et"
+
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="20dp"
+
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+
+                android:gravity="start"
+
+                android:text="@string/priority"
+                android:textColor="?attr/colorOnSecondary"
+                android:textSize="@dimen/meta"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.666"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_et" />
+
+            <Spinner
+                android:id="@+id/priority_sp"
+
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="20dp"
+
+                android:entries="@array/priorities"
+
+                android:textSize="@dimen/body"
+                android:textColor="@color/color_light_gray"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/priority_et"  />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/first_separator_line"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+
+                app:dividerThickness="0.5dp"
+
+                android:background="@color/color_light_gray"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/priority_sp" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/deadline_sw"
+
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="20dp"
+
+                android:text="@string/do_until"
+                android:textSize="@dimen/meta"
+                android:theme="@style/Switch"
+                android:textColor="?attr/colorOnSecondary"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/first_separator_line" />
+
+            <TextView
+                android:id="@+id/deadline_date"
+
+                android:layout_width="0dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="20dp"
+
+                android:paddingStart="3dp"
+                android:paddingEnd="3dp"
+
+                android:text=""
+                android:textColor="@color/color_light_blue"
+                android:textSize="@dimen/body"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deadline_sw" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/end_separator_line"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+
+                app:dividerThickness="0.5dp"
+
+                android:background="@color/color_light_gray"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/deadline_date" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
