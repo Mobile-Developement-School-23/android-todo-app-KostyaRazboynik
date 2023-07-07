@@ -14,6 +14,6 @@ data class ToDoItemNetworkEntity(
     @SerializedName("done") val done: Boolean,
     @SerializedName("createdAt") val createdAt: Long,
     @SerializedName("changedAt") val changedAt: Long,
-    @SerializedName("color") val color: String = "#FFFFFF",
+    @SerializedName("color") val color: String?,
     @SerializedName("last_updated_by") val last_updated_by: String = "this",
 )

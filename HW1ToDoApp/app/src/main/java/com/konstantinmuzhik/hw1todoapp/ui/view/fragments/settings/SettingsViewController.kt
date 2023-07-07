@@ -1,35 +1,45 @@
 package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.settings
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.RadioGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import com.konstantinmuzhik.hw1todoapp.R
-import com.konstantinmuzhik.hw1todoapp.data.repository.SharedPreferencesRepository
+import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
+import com.konstantinmuzhik.hw1todoapp.databinding.FragmentSettingsBinding
+import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.YandexAuthViewModel
+import kotlinx.coroutines.launch
 
 class SettingsViewController(
-    rootView: View,
+    private val binding: FragmentSettingsBinding,
     private val navController: NavController,
-    private val sharedRepository: SharedPreferencesRepository
+    private val sharedRepository: SharedPreferencesAppSettings,
+    private val viewModel: YandexAuthViewModel
 ) {
-
-    private val closeButton: ImageView = rootView.findViewById(R.id.close)
-    private val themeSelector: RadioGroup = rootView.findViewById(R.id.theme_selector)
 
     fun setUpViews() {
         setUpSelector()
         setUpSelectorListener()
         setUpCloseButton()
+        collectAccountInfo()
+    }
+
+    private fun collectAccountInfo() {
+//        lifecycleScope.launch {
+//            viewModel.accountInfo.collect {
+//                if (it != null) binding.loggedName.text = it
+//                else binding.loggedName.text = getString(R.string.guest_id)
+//            }
+//        }
     }
 
     private fun setUpCloseButton() =
-        closeButton.setOnClickListener {
+        binding.toolbar.setOnClickListener {
             navController.popBackStack()
         }
 
     private fun setUpSelectorListener() =
-        themeSelector.setOnCheckedChangeListener { _, checkedId ->
+        binding.themeSelector.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.light_theme_button -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -50,12 +60,11 @@ class SettingsViewController(
 
     private fun setUpSelector() {
         when (sharedRepository.getTheme()) {
-            0 -> themeSelector.check(R.id.light_theme_button)
-            1 -> themeSelector.check(R.id.dark_theme_button)
-            2 -> themeSelector.check(R.id.system_theme_button)
+            0 -> binding.themeSelector.check(R.id.light_theme_button)
+            1 -> binding.themeSelector.check(R.id.dark_theme_button)
+            2 -> binding.themeSelector.check(R.id.system_theme_button)
         }
-
-        themeSelector.jumpDrawablesToCurrentState()
+        binding.themeSelector.jumpDrawablesToCurrentState()
     }
 
 }

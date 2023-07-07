@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.konstantinmuzhik.hw1todoapp.App
-import com.konstantinmuzhik.hw1todoapp.R
-import com.konstantinmuzhik.hw1todoapp.data.repository.SharedPreferencesRepository
+import com.konstantinmuzhik.hw1todoapp.appComponent
+import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
+import com.konstantinmuzhik.hw1todoapp.databinding.FragmentSettingsBinding
 import com.konstantinmuzhik.hw1todoapp.ioc.settings.SettingsFragmentComponent
 import com.konstantinmuzhik.hw1todoapp.ioc.settings.SettingsFragmentViewComponent
+import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.YandexAuthViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SettingsFragment : Fragment() {
@@ -19,13 +24,21 @@ class SettingsFragment : Fragment() {
     private lateinit var fragmentComponent: SettingsFragmentComponent
     private var fragmentViewComponent: SettingsFragmentViewComponent? = null
 
+    private var _binding: FragmentSettingsBinding? = null
+    private val binding get() = _binding!!
+
     @Inject
-    lateinit var sharedRepository: SharedPreferencesRepository
+    lateinit var sharedRepository: SharedPreferencesAppSettings
+
+    private val viewModel: YandexAuthViewModel by viewModels {
+        ViewModelFactory {
+            (requireActivity().application as App).appComponent.yandexAuthViewModel()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        (requireActivity().application as App).getAppComponent().inject(this)
+        requireContext().appComponent.inject(this)
 
         fragmentComponent = SettingsFragmentComponent(fragment = this)
     }
@@ -34,22 +47,34 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-
-        val view = inflater.inflate(R.layout.fragment_settings, container, false)
+        _binding = FragmentSettingsBinding.inflate(layoutInflater)
 
         fragmentViewComponent = SettingsFragmentViewComponent(
-            root = view,
+            binding,
             navController = findNavController(),
-            sharedRepository
+            sharedRepository,
+            viewModel
         ).apply {
             settingsViewController.setUpViews()
         }
+        return binding.root
+    }
 
-        return view
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            viewModel.accountInfo.collect {
+                if (it != null) binding.loggedName.text = it
+                else binding.loggedName.text = ""
+            }
+        }
+        // TODO как это прокинуть в SettingsViewController хз мешает scope
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _binding = null
         fragmentViewComponent = null
     }
 }

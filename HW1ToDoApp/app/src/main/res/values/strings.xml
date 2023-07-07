@@ -17,6 +17,12 @@
     <string name="create">CREATE</string>
     <string name="delete">Delete</string>
 
+    <!-- Theme Selector-->
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="system">System</string>
+    <string name="logout">LOGOUT</string>
+
     <!-- toasts -->
     <string name="fill_title">Please fill out the title</string>
     <string name="successfully_added">Successfully Added!</string>
@@ -54,6 +60,9 @@
     <string name="yandex_id">Login with Yandex ID</string>
     <string name="guest_id">Login as а guest</string>
 
+    <!-- settings -->
+    <string name="guest_mode">Guest</string>
+
     <!-- priority -->
     <string name="high_priority">High Priority</string>
     <string name="no_priority">No</string>
@@ -62,10 +71,6 @@
     <string name="no">""</string>
     <string name="high">High</string>
     <string name="low">Low</string>
-    <string name="light">Light</string>
-    <string name="dark">Dark</string>
-    <string name="system">System</string>
-    <string name="logout">LOGOUT</string>
 
     <string-array name="priorities">
         <item>No</item>

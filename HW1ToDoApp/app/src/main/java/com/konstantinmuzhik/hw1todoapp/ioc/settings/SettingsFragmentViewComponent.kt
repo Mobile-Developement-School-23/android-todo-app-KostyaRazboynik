@@ -1,20 +1,23 @@
 package com.konstantinmuzhik.hw1todoapp.ioc.settings
 
-import android.view.View
 import androidx.navigation.NavController
-import com.konstantinmuzhik.hw1todoapp.data.repository.SharedPreferencesRepository
+import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
+import com.konstantinmuzhik.hw1todoapp.databinding.FragmentSettingsBinding
 import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.settings.SettingsViewController
+import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.YandexAuthViewModel
 
 
 class SettingsFragmentViewComponent (
-    root: View,
+    binding: FragmentSettingsBinding,
     navController: NavController,
-    sharedRepository: SharedPreferencesRepository
+    sharedRepository: SharedPreferencesAppSettings,
+    viewModel: YandexAuthViewModel
 ) {
 
     val settingsViewController = SettingsViewController(
-        root,
+        binding,
         navController,
-        sharedRepository
+        sharedRepository,
+        viewModel
     )
 }

@@ -8,5 +8,5 @@ import retrofit2.http.Header
 interface YandexPassportApi {
 
     @GET("info")
-    suspend fun getInfo(@Header("Authorization") auth:String):Response<InfoResponse>
+    suspend fun getInfo(@Header("Authorization") auth: String): Response<InfoResponse>
 }

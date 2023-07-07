@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.data.models
+package com.konstantinmuzhik.hw1todoapp.domain.models
 
 sealed class LoadingState<out T> {
     data class Success<out T>(val data: T): LoadingState<T>()

@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_settingsFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popUpTo="@id/listFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/listFragment"
@@ -36,11 +40,17 @@
         <action
             android:id="@+id/action_listFragment_to_fragmentAuth"
             app:destination="@id/fragmentAuth"
-            app:popUpTo="@id/my_nav"
-            app:popUpToInclusive="true" />
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_listFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -79,7 +89,9 @@
         <action
             android:id="@+id/action_fragmentAuth_to_listFragment"
             app:destination="@id/listFragment"
-            app:popUpTo="@id/my_nav"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popUpTo="@id/listFragment"
             app:popUpToInclusive="true"/>
     </fragment>
 

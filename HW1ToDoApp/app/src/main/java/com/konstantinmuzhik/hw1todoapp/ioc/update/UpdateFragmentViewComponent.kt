@@ -1,0 +1,28 @@
+package com.konstantinmuzhik.hw1todoapp.ioc.update
+
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
+import com.konstantinmuzhik.hw1todoapp.databinding.FragmentUpdateBinding
+import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.update.UpdateViewController
+import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.SharedViewHelper
+import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
+
+class UpdateFragmentViewComponent (
+    binding: FragmentUpdateBinding,
+    mSharedViewModel: SharedViewHelper,
+    mToDoViewModel: ToDoItemViewModel,
+    navController: NavController,
+    fragment: Fragment,
+    toDoItem: ToDoItem
+) {
+
+    val updateViewController = UpdateViewController(
+        binding,
+        mSharedViewModel,
+        mToDoViewModel,
+        navController,
+        fragment,
+        toDoItem
+    )
+}

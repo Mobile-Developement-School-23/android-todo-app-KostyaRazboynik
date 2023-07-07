@@ -37,7 +37,7 @@
             app:navigationIconTint="?attr/colorOnSecondary">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_save_create"
+                android:id="@+id/save_btn"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

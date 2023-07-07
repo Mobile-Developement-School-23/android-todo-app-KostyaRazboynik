@@ -16,6 +16,7 @@ object ToDoNetworkMapper {
             createdAt = toDoItem.createdAt.time,
             changedAt = toDoItem.changedAt?.time ?: 0,
             last_updated_by = deviseId,
+            color = null
         )
 
     fun networkEntityToModel(todoItemEntity: ToDoItemNetworkEntity): ToDoItem =

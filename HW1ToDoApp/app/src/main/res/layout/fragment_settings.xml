@@ -4,28 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:background="?attr/colorPrimaryVariant"
+
     tools:context=".ui.view.fragments.settings.SettingsFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/close"
-            android:layout_width="wrap_content"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_gravity="start|top"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/close"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:fitsSystemWindows="true"
+        android:theme="@style/Theme.HW1ToDoApp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="24dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+
+            android:background="?attr/colorSecondary"
+
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.appcompat.widget.Toolbar>
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/close"
+            app:navigationIconTint="?attr/colorOnSecondary"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
         android:id="@+id/light_textview"
@@ -33,11 +42,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/light"
-        android:textColor="@color/black"
+        app:expandedTitleTextColor="?attr/colorOnSecondary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/light_imageview"
         app:layout_constraintStart_toStartOf="@+id/light_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
     <TextView
         android:id="@+id/dark_textview"
@@ -45,12 +54,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/dark"
-        android:textColor="@color/black"
+        app:expandedTitleTextColor="?attr/colorOnSecondary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/dark_imageview"
         app:layout_constraintStart_toEndOf="@+id/light_imageview"
         app:layout_constraintStart_toStartOf="@+id/dark_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
     <TextView
         android:id="@+id/system_textview"
@@ -58,18 +67,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/system"
-        android:textColor="@color/black"
+        app:expandedTitleTextColor="?attr/colorOnSecondary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/system_imageview"
         app:layout_constraintStart_toEndOf="@+id/dark_imageview"
         app:layout_constraintStart_toStartOf="@+id/system_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
     <ImageView
         android:id="@+id/light_imageview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/light_theme"
+        android:importantForAccessibility="no"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -83,6 +93,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/dark_theme"
+        android:importantForAccessibility="no"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="0.5"
@@ -95,6 +106,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/system_theme"
+        android:importantForAccessibility="no"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -157,8 +169,7 @@
         android:id="@+id/logged_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="Ваше имя"
+        app:expandedTitleTextColor="?attr/colorOnSecondary"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

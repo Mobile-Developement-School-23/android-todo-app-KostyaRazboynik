@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
 import androidx.room.Update
 import com.konstantinmuzhik.hw1todoapp.data.datasource.local.entity.ToDoItemEntity
 import kotlinx.coroutines.flow.Flow
@@ -34,21 +33,9 @@ interface ToDoItemDao {
     @Delete
     suspend fun deleteToDoItem(toDoItemEntity: ToDoItemEntity)
 
-    @Query("delete from todo_items where id = :id")
-    suspend fun deleteById(id:String)
-
     @Query("DELETE FROM todo_items")
     suspend fun deleteAllToDoItems()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun mergeToDoItems(todoItems: List<ToDoItemEntity>)
-
-    @Insert
-    suspend fun insertAll(todoItems:List<ToDoItemEntity>)
-
-    @Transaction
-    open suspend fun rewriteTable(todoItems:List<ToDoItemEntity>){
-        deleteAllToDoItems()
-        insertAll(todoItems)
-    }
 }

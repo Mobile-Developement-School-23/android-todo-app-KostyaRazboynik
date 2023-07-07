@@ -13,6 +13,6 @@
     app:defaultNavHost="true"
     app:navGraph="@navigation/my_nav"
 
-    tools:context=".ui.MainActivity"/>
+    tools:context=".ui.view.activity.MainActivity"/>
 
 

@@ -6,15 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.konstantinmuzhik.hw1todoapp.App
-import com.konstantinmuzhik.hw1todoapp.R
-import com.konstantinmuzhik.hw1todoapp.data.SharedPreferencesAppSettings
+import com.konstantinmuzhik.hw1todoapp.appComponent
+import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
+import com.konstantinmuzhik.hw1todoapp.databinding.FragmentAuthBinding
 import com.konstantinmuzhik.hw1todoapp.ioc.auth.AuthFragmentComponent
 import com.konstantinmuzhik.hw1todoapp.ioc.auth.AuthFragmentViewComponent
-import com.konstantinmuzhik.hw1todoapp.ioc.auth.AuthFragmentYandexComponent
-import com.konstantinmuzhik.hw1todoapp.ui.ViewModelFactory
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
 import com.yandex.authsdk.YandexAuthOptions
 import com.yandex.authsdk.YandexAuthSdk
@@ -24,47 +22,43 @@ class AuthFragment : Fragment() {
 
     private lateinit var fragmentComponent: AuthFragmentComponent
     private var fragmentViewComponent: AuthFragmentViewComponent? = null
-    private var fragmentYandexComponent: AuthFragmentYandexComponent? = null
 
-    private lateinit var sdk: YandexAuthSdk
+    private var _binding: FragmentAuthBinding? = null
+    private val binding get() = _binding!!
+
+    private val sdk: YandexAuthSdk by lazy {
+        YandexAuthSdk(requireContext(), YandexAuthOptions(requireContext()))
+    }
 
     @Inject
     lateinit var sharedPreferences: SharedPreferencesAppSettings
-
-    private val viewModel: ToDoItemViewModel by viewModels{
-        ViewModelFactory{
-            (requireActivity().application as App).getAppComponent().toDoItemViewModel()
-        }
-    }
+    private val mToDoItemViewModel: ToDoItemViewModel by activityViewModels { requireContext().appComponent.findViewModelFactory() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        (requireActivity().application as App).getAppComponent().inject(this)
+        requireContext().appComponent.inject(this)
 
         fragmentComponent = AuthFragmentComponent(fragment = this)
-        sdk = YandexAuthSdk(requireContext(), YandexAuthOptions(requireContext(), true))
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        val view = inflater.inflate(R.layout.fragment_auth, container, false)
+        _binding = FragmentAuthBinding.inflate(layoutInflater)
 
         fragmentViewComponent = AuthFragmentViewComponent(
-            view,
+            binding,
             navController = findNavController(),
             sharedPreferences,
             sdk,
             fragmentComponent,
-            viewModel
+            mToDoItemViewModel
         ).apply {
             authViewController.setUpViews()
         }
-
-        return view
+        return binding.root
     }
 
     @Deprecated("Deprecated in Java")
@@ -73,19 +67,15 @@ class AuthFragment : Fragment() {
         resultCode: Int,
         data: Intent?
     ) {
-        fragmentYandexComponent = AuthFragmentYandexComponent(
-            context,
-            requestCode,
-            resultCode,
-            data,
-            navController = findNavController(),
-            sharedPreferences,
-            sdk,
-            viewModel
-        ).apply {
-            authYandexController.setUpYandexResult()
+        fragmentViewComponent!!.apply {
+            authViewController.onActivityResult(requestCode, resultCode, data)
         }
-
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        fragmentViewComponent = null
+        _binding = null
     }
 }

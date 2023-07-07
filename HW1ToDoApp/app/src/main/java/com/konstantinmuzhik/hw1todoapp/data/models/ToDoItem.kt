@@ -2,7 +2,6 @@ package com.konstantinmuzhik.hw1todoapp.data.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.util.Calendar
 import java.util.Date
 
 @Parcelize
@@ -10,21 +9,14 @@ data class ToDoItem(
     var id: String,
     var title: String,
     var priority: Priority,
-    var deadline: Date?,
+    var deadline: Date? = null,
     var done: Boolean,
-    val createdAt: Date,
-    var changedAt: Date?
+    var createdAt: Date,
+    var changedAt: Date? = null
 ) : Parcelable {
 
-    constructor() : this(
-        "-1",
-        "",
-        Priority.NO,
-        null,
-        false,
-        Calendar.getInstance().time,
-        Calendar.getInstance().time
-    )
+    constructor() : this("-1", "", Priority.NO, null, false, Date(), Date())
+
 
     fun setArgs(
         title: String,

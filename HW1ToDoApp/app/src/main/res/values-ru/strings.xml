@@ -17,6 +17,12 @@
     <string name="create">ДОБАВИТЬ</string>
     <string name="delete">Удалить</string>
 
+    <!-- Theme Selector-->
+    <string name="light">Светлая</string>
+    <string name="dark">Темная</string>
+    <string name="system">Системная</string>
+    <string name="logout">Выйти</string>
+
     <!-- toasts -->
     <string name="fill_title">Пожалуйста, заполните название задачи</string>
     <string name="successfully_added">Добавлено!</string>
@@ -53,6 +59,9 @@
     <!-- auth -->
     <string name="yandex_id">Войти с Яндекс ID</string>
     <string name="guest_id">Войти как гость</string>
+
+    <!-- settings -->
+    <string name="guest_mode">Гость</string>
 
     <!-- priority -->
     <string name="high_priority">Высокий приоритет</string>

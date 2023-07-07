@@ -1,21 +1,19 @@
 package com.konstantinmuzhik.hw1todoapp.ui.viewmodels
 
-import android.app.Application
 import android.view.View
 import android.widget.AdapterView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.AndroidViewModel
 import com.konstantinmuzhik.hw1todoapp.R
 
 
-class SharedViewModel(application: Application) : AndroidViewModel(application) {
+object SharedViewHelper {
 
     val spinnerListener = object :
         AdapterView.OnItemSelectedListener {
         override fun onItemSelected(
             parent: AdapterView<*>?,
-            view: View?,
+            view: View,
             position: Int,
             id: Long
         ) {
@@ -23,7 +21,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
                 0 -> {
                     (parent?.getChildAt(0) as TextView).setTextColor(
                         ContextCompat.getColor(
-                            application,
+                            view.context,
                             R.color.color_light_gray
                         )
                     )
@@ -32,7 +30,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
                 1 -> {
                     (parent?.getChildAt(0) as TextView).setTextColor(
                         ContextCompat.getColor(
-                            application,
+                            view.context,
                             R.color.color_light_red
                         )
                     )
@@ -41,7 +39,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
                 2 -> {
                     (parent?.getChildAt(0) as TextView).setTextColor(
                         ContextCompat.getColor(
-                            application,
+                            view.context,
                             R.color.color_light_green
                         )
                     )

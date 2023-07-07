@@ -1,26 +1,26 @@
 package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.auth
 
-import android.view.View
-import androidx.cardview.widget.CardView
+import android.content.Intent
 import androidx.navigation.NavController
 import com.konstantinmuzhik.hw1todoapp.R
-import com.konstantinmuzhik.hw1todoapp.data.SharedPreferencesAppSettings
+import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
+import com.konstantinmuzhik.hw1todoapp.databinding.FragmentAuthBinding
 import com.konstantinmuzhik.hw1todoapp.ioc.auth.AuthFragmentComponent
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
 import com.konstantinmuzhik.hw1todoapp.utils.Constants
+import com.konstantinmuzhik.hw1todoapp.utils.Constants.REQUEST_LOGIN_SDK_CODE
+import com.yandex.authsdk.YandexAuthException
 import com.yandex.authsdk.YandexAuthLoginOptions
 import com.yandex.authsdk.YandexAuthSdk
 
 class AuthViewController (
-    private val rootView: View,
+    private val binding: FragmentAuthBinding,
     private val navController: NavController,
-    private val sharedPreferencesAppSettings: SharedPreferencesAppSettings,
+    private val sharedPreferences: SharedPreferencesAppSettings,
     private val sdk: YandexAuthSdk,
     private val fragmentComponent: AuthFragmentComponent,
-    private val viewModel: ToDoItemViewModel
+    private val mToDoItemViewModel: ToDoItemViewModel
 ) {
-
-    private val REQUEST_LOGIN_SDK = 1
 
     fun setUpViews() {
         setUpYandexAuthButton()
@@ -28,11 +28,11 @@ class AuthViewController (
     }
 
     private fun setUpLogInButton() {
-        rootView.findViewById<CardView>(R.id.log_in_button).setOnClickListener{
-            if (sharedPreferencesAppSettings.getCurrentToken() != Constants.TOKEN_API) {
-                viewModel.deleteAllToDoItems()
-                sharedPreferencesAppSettings.setCurrentToken("Bearer ${Constants.TOKEN_API}")
-                sharedPreferencesAppSettings.putRevisionId(0)
+        binding.logInGuestButton.setOnClickListener {
+            if (sharedPreferences.getCurrentToken() != Constants.TOKEN_API) {
+                mToDoItemViewModel.deleteAll()
+                sharedPreferences.setCurrentToken("Bearer ${Constants.TOKEN_API}")
+                sharedPreferences.putRevisionId(0)
             }
             navController.navigate(R.id.action_fragmentAuth_to_listFragment)
         }
@@ -41,9 +41,32 @@ class AuthViewController (
     private fun setUpYandexAuthButton() {
         val loginOptionsBuilder = YandexAuthLoginOptions.Builder()
         val intent = sdk.createLoginIntent(loginOptionsBuilder.build())
-        rootView.findViewById<CardView>(R.id.yandex_auth_button).setOnClickListener {
-            fragmentComponent.fragment.startActivityForResult(intent, REQUEST_LOGIN_SDK)
+        binding.yandexAuthButton.setOnClickListener{
+            fragmentComponent.fragment.startActivityForResult(intent, REQUEST_LOGIN_SDK_CODE)
         }
     }
 
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_LOGIN_SDK_CODE) {
+            try {
+                setUpToken(resultCode, data)
+            } catch (_: YandexAuthException) {
+            }
+            return
+        }
+    }
+
+    private fun setUpToken(resultCode: Int, data: Intent?) {
+        val yandexAuthToken = sdk.extractToken(resultCode, data)
+        if (yandexAuthToken != null) {
+            val curToken = yandexAuthToken.value
+            if (curToken != sharedPreferences.getCurrentToken()) {
+                mToDoItemViewModel.deleteAll()
+                sharedPreferences.setCurrentToken("OAuth ${yandexAuthToken.value}")
+                sharedPreferences.putRevisionId(0)
+            }
+            sharedPreferences.setCurrentToken("OAuth ${yandexAuthToken.value}")
+            navController.navigate(R.id.action_fragmentAuth_to_listFragment)
+        }
+    }
 }

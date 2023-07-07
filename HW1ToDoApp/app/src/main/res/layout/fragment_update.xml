@@ -42,7 +42,7 @@
                 app:navigationIconTint="?attr/colorOnSecondary">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_save_create"
+                    android:id="@+id/save_btn"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -195,70 +195,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/current_deadline_sw" />
 
                 <com.google.android.material.divider.MaterialDivider
-                    android:id="@+id/second_separator_line"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="20dp"
-
-                    app:dividerThickness="0.5dp"
-
-                    android:background="@color/color_light_gray"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/current_deadline_date" />
-
-                <TextView
-                    android:id="@+id/creation_date"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="20dp"
-
-                    android:hint="@string/creation_date"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/body"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/second_separator_line" />
-
-                <TextView
-                    android:id="@+id/last_change_date"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginStart="20dp"
-
-                    android:hint="@string/last_change_date"
-                    android:text=""
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/body"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/creation_date" />
-
-                <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/end_separator_line"
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-
-                    app:dividerThickness="0.5dp"
+                    android:layout_marginTop="8dp"
 
                     android:background="@color/color_light_gray"
 
+                    app:dividerThickness="0.5dp"
+
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/last_change_date" />
+                    app:layout_constraintTop_toBottomOf="@+id/current_deadline_date" />
 
 
                 <TextView

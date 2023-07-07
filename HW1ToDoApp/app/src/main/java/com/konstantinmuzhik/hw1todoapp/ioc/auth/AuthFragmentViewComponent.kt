@@ -1,27 +1,27 @@
 package com.konstantinmuzhik.hw1todoapp.ioc.auth
 
-import android.view.View
 import androidx.navigation.NavController
-import com.konstantinmuzhik.hw1todoapp.data.SharedPreferencesAppSettings
+import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
+import com.konstantinmuzhik.hw1todoapp.databinding.FragmentAuthBinding
 import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.auth.AuthViewController
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
 import com.yandex.authsdk.YandexAuthSdk
 
 class AuthFragmentViewComponent (
-    root: View,
+    binding: FragmentAuthBinding,
     navController: NavController,
-    sharedPreferencesAppSettings: SharedPreferencesAppSettings,
+    sharedPreferencesRepository: SharedPreferencesAppSettings,
     sdk: YandexAuthSdk,
     fragmentComponent: AuthFragmentComponent,
-    viewModel: ToDoItemViewModel
+    mToDoItemViewModel: ToDoItemViewModel
 ) {
 
     val authViewController = AuthViewController(
-        root,
+        binding,
         navController,
-        sharedPreferencesAppSettings,
+        sharedPreferencesRepository,
         sdk,
         fragmentComponent,
-        viewModel
+        mToDoItemViewModel
     )
 }

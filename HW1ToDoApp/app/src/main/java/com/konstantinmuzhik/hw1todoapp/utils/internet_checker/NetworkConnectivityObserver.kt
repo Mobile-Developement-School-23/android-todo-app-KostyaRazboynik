@@ -3,16 +3,14 @@ package com.konstantinmuzhik.hw1todoapp.utils.internet_checker
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
-import com.konstantinmuzhik.hw1todoapp.di.scope.AppScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@AppScope
-class NetworkConnectivityObserver @Inject constructor(
+
+class NetworkConnectivityObserver (
     context: Context
 ) : ConnectivityObserver {
 

@@ -19,18 +19,6 @@ interface ToDoItemApi {
     @GET("list")
     suspend fun getList(@Header("Authorization") token: String): Response<ToDoItemListResponse>
 
-    @GET("list/{id}")
-    suspend fun loadTodoItem(
-        @Header("Authorization") auth: String, @Path("id") id: String
-    ): Response<ToDoItemResponse>
-
-    @DELETE("list/{id}")
-    suspend fun deleteTodoItem(
-        @Header("Authorization") auth: String,
-        @Header("X-Last-Known-Revision") revision: Int,
-        @Path("id") id: String,
-    ): Response<ToDoItemResponse>
-
     @PATCH("list")
     suspend fun updateList(
         @Header("Authorization") token: String,
@@ -38,16 +26,18 @@ interface ToDoItemApi {
         @Body body: ToDoItemListRequest
     ): Response<ToDoItemListResponse>
 
+    @GET("list/{id}")
+    suspend fun getTaskById(@Path("id") itemId: String): Response<ToDoItemResponse>
+
     @POST("list")
-    suspend fun addToDoItem(
+    suspend fun addTask(
         @Header("Authorization") token: String,
         @Header("X-Last-Known-Revision") lastKnownRevision: Int,
         @Body newItem: ToDoItemRequest
     ): Response<ToDoItemResponse>
 
-
     @PUT("list/{id}")
-    suspend fun updateToDoItem(
+    suspend fun updateTask(
         @Header("Authorization") token: String,
         @Header("X-Last-Known-Revision") lastKnownRevision: Int,
         @Path("id") itemId: String,
@@ -55,9 +45,9 @@ interface ToDoItemApi {
     ): Response<ToDoItemResponse>
 
     @DELETE("list/{id}")
-    suspend fun deleteToDoItem(
+    suspend fun deleteTask(
         @Header("Authorization") token: String,
         @Header("X-Last-Known-Revision") lastKnownRevision: Int,
-        @Path("id") itemId: String
+        @Path("id") itemId: String,
     ): Response<ToDoItemResponse>
 }
