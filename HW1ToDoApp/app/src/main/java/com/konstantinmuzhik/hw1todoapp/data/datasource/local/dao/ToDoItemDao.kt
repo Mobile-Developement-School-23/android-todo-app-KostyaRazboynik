@@ -9,13 +9,19 @@ import androidx.room.Update
 import com.konstantinmuzhik.hw1todoapp.data.datasource.local.entity.ToDoItemEntity
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * DAO for ToDoItems
+ *
+ * @author Konstantin Kovalev
+ *
+ */
 @Dao
 interface ToDoItemDao {
 
     @Query("SELECT * FROM todo_items ORDER BY changedAt DESC")
     fun getToDoItemsFlow(): Flow<List<ToDoItemEntity>>
 
-    @Query("SELECT * FROM todo_items ORDER BY deadline")
+    @Query("SELECT * FROM todo_items ORDER BY changedAt DESC")
     fun getToDoItems(): List<ToDoItemEntity>
 
     @Query("SELECT * FROM todo_items WHERE id = :id")

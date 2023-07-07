@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.ioc.auth
+package com.konstantinmuzhik.hw1todoapp.ioc.fragments.auth
 
 import androidx.fragment.app.Fragment
 

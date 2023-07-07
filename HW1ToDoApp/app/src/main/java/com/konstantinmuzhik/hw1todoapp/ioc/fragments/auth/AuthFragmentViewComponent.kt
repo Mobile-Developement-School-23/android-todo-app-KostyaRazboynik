@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.ioc.auth
+package com.konstantinmuzhik.hw1todoapp.ioc.fragments.auth
 
 import androidx.navigation.NavController
 import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings

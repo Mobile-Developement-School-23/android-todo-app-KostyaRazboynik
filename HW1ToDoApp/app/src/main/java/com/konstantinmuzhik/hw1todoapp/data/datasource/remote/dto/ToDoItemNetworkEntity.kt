@@ -2,9 +2,16 @@ package com.konstantinmuzhik.hw1todoapp.data.datasource.remote.dto
 
 import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
-import com.konstantinmuzhik.hw1todoapp.data.datasource.remote.PriorityAdapter
+import com.konstantinmuzhik.hw1todoapp.data.datasource.remote.utils.PriorityAdapter
 import com.konstantinmuzhik.hw1todoapp.data.models.Priority
 
+
+/**
+ * Network Entity for ToDoItem
+ *
+ * @author Konstantin Kovalev
+ *
+ */
 data class ToDoItemNetworkEntity(
     @SerializedName("id") val id: String,
     @SerializedName("title") val title: String,

@@ -9,6 +9,12 @@ import com.konstantinmuzhik.hw1todoapp.R
 import com.konstantinmuzhik.hw1todoapp.ui.view.adapters.ToDoItemViewHolder
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
+/**
+ * Swipe Callback
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class SwipeCallback(
     private val swipeCallback: SwipeCallbackInterface,
     private val context: Context,
@@ -67,7 +73,7 @@ class SwipeCallback(
 
     private fun setDeleteCallback(viewHolder: RecyclerView.ViewHolder) =
         (viewHolder as? ToDoItemViewHolder)?.todoItem?.let {
-            swipeCallback.onDelete(viewHolder, it)
+            swipeCallback.onDelete(it)
         }
 
     private fun setChangeDoneCallback(viewHolder: RecyclerView.ViewHolder) =

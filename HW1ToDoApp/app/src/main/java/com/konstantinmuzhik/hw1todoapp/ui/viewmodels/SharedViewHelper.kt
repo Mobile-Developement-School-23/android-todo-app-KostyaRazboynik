@@ -7,6 +7,12 @@ import androidx.core.content.ContextCompat
 import com.konstantinmuzhik.hw1todoapp.R
 
 
+/**
+ * View Helper
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 object SharedViewHelper {
 
     val spinnerListener = object :

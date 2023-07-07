@@ -6,7 +6,13 @@ import com.konstantinmuzhik.hw1todoapp.di.AppComponent
 import com.konstantinmuzhik.hw1todoapp.di.DaggerAppComponent
 import javax.inject.Inject
 
-class App : Application() {
+
+/**
+ * App
+ *
+ * @author Kovalev Konstantin
+ *
+ */class App : Application() {
 
     lateinit var appComponent: AppComponent
 

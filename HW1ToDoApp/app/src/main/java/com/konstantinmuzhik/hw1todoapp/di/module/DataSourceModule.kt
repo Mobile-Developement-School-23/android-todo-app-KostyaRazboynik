@@ -7,12 +7,16 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+/**
+ * Data Source Module
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 @Module
 object DataSourceModule {
-
     @Singleton
     @Provides
     fun provideSharedPreferencesDataSource(context: Context): SharedPreferencesAppSettings =
         SharedPreferencesAppSettings(context)
-
 }

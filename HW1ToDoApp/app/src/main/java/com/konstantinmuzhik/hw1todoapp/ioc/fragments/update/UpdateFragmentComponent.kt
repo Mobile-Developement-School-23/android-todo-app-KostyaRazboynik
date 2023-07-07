@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.ioc.update
+package com.konstantinmuzhik.hw1todoapp.ioc.fragments.update
 
 import androidx.fragment.app.Fragment
 

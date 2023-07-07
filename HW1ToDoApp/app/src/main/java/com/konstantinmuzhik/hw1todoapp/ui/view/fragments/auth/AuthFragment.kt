@@ -11,13 +11,19 @@ import androidx.navigation.fragment.findNavController
 import com.konstantinmuzhik.hw1todoapp.appComponent
 import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
 import com.konstantinmuzhik.hw1todoapp.databinding.FragmentAuthBinding
-import com.konstantinmuzhik.hw1todoapp.ioc.auth.AuthFragmentComponent
-import com.konstantinmuzhik.hw1todoapp.ioc.auth.AuthFragmentViewComponent
+import com.konstantinmuzhik.hw1todoapp.ioc.fragments.auth.AuthFragmentComponent
+import com.konstantinmuzhik.hw1todoapp.ioc.fragments.auth.AuthFragmentViewComponent
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
 import com.yandex.authsdk.YandexAuthOptions
 import com.yandex.authsdk.YandexAuthSdk
 import javax.inject.Inject
 
+/**
+ * Auth Fragment
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class AuthFragment : Fragment() {
 
     private lateinit var fragmentComponent: AuthFragmentComponent

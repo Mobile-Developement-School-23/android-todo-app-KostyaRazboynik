@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.data.datasource.remote
+package com.konstantinmuzhik.hw1todoapp.data.datasource.remote.utils
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -10,6 +10,12 @@ import com.konstantinmuzhik.hw1todoapp.data.models.Priority
 import java.lang.reflect.Type
 import java.util.Locale
 
+/**
+ * Json Serializer and Deserializer for Priority
+ *
+ * @author Konstantin Kovalev
+ *
+ */
 class PriorityAdapter : JsonSerializer<Priority>, JsonDeserializer<Priority> {
     override fun serialize(
         src: Priority?, typeOfSrc: Type?, context: JsonSerializationContext?,

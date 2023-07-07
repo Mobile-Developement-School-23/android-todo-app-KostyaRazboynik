@@ -1,7 +1,7 @@
 package com.konstantinmuzhik.hw1todoapp.di
 
 import android.content.Context
-import com.konstantinmuzhik.hw1todoapp.ViewModelFactory
+import com.konstantinmuzhik.hw1todoapp.ui.view.ViewModelFactory
 import com.konstantinmuzhik.hw1todoapp.di.module.ApiModule
 import com.konstantinmuzhik.hw1todoapp.di.module.DataBaseModule
 import com.konstantinmuzhik.hw1todoapp.di.module.DataSourceModule
@@ -20,6 +20,12 @@ import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
+/**
+ * AppComponent
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 @Singleton
 @Component(
     modules = [

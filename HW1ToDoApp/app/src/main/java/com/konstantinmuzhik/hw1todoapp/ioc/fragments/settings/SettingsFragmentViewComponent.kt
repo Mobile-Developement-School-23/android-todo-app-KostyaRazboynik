@@ -1,5 +1,7 @@
-package com.konstantinmuzhik.hw1todoapp.ioc.settings
+package com.konstantinmuzhik.hw1todoapp.ioc.fragments.settings
 
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
 import com.konstantinmuzhik.hw1todoapp.databinding.FragmentSettingsBinding
@@ -11,13 +13,17 @@ class SettingsFragmentViewComponent (
     binding: FragmentSettingsBinding,
     navController: NavController,
     sharedRepository: SharedPreferencesAppSettings,
-    viewModel: YandexAuthViewModel
+    viewModel: YandexAuthViewModel,
+    lifecycleOwner: LifecycleOwner,
+    fragment: Fragment
 ) {
 
     val settingsViewController = SettingsViewController(
         binding,
         navController,
         sharedRepository,
-        viewModel
+        viewModel,
+        lifecycleOwner,
+        fragment
     )
 }

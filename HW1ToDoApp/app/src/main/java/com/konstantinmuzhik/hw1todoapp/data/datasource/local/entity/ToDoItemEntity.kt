@@ -5,6 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.konstantinmuzhik.hw1todoapp.data.models.Priority
 
+
+/**
+ * Entity for ToDoItem
+ *
+ * @author Konstantin Kovalev
+ *
+ */
 @Entity(tableName = "todo_items")
 data class ToDoItemEntity(
     @PrimaryKey @ColumnInfo(name = "id") var id: String,

@@ -11,19 +11,26 @@ import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 import com.konstantinmuzhik.hw1todoapp.databinding.FragmentAddBinding
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.SharedViewHelper
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
-import com.konstantinmuzhik.hw1todoapp.utils.internet_checker.ConnectivityObserver
+import com.konstantinmuzhik.hw1todoapp.data.repository.internet_checker.ConnectivityObserver
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
+
+/**
+ * Add Fragment View Controller
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class AddViewController(
     private val binding: FragmentAddBinding,
     private val mSharedViewHelper: SharedViewHelper,
     private val mToDoViewModel: ToDoItemViewModel,
     private val navController: NavController,
-    private val fragment: Fragment,
+    private val fragment: Fragment
 ) {
 
     private var currentToDoItem = ToDoItem()
@@ -132,7 +139,6 @@ class AddViewController(
     private fun createVerifiedToDoItem() {
         if (mToDoViewModel.status.value == ConnectivityObserver.Status.Available)
             mToDoViewModel.updateRemoteTask(currentToDoItem)
-            else makeToast(fragment.getString(R.string.no_network_will_be_created_later))
         mToDoViewModel.createTask(currentToDoItem)
 
         makeToast(fragment.getString(R.string.successfully_added))

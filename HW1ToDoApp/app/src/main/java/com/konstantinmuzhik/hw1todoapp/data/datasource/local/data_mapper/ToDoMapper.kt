@@ -4,6 +4,12 @@ import com.konstantinmuzhik.hw1todoapp.data.datasource.local.entity.ToDoItemEnti
 import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 import java.util.Date
 
+/**
+ * Mapper ToDoItem <-> ToDoItemEntity
+ *
+ * @author Konstantin Kovalev
+ *
+ */
 object ToDoMapper {
 
     fun modelToEntity(toDoItem: ToDoItem): ToDoItemEntity =

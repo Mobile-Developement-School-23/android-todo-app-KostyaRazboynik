@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.ioc.settings
+package com.konstantinmuzhik.hw1todoapp.ioc.fragments.settings
 
 import androidx.fragment.app.Fragment
 

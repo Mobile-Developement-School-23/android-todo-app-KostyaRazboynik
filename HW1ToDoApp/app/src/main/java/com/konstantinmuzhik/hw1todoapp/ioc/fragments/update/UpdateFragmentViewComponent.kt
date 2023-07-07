@@ -1,5 +1,6 @@
-package com.konstantinmuzhik.hw1todoapp.ioc.update
+package com.konstantinmuzhik.hw1todoapp.ioc.fragments.update
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
@@ -14,6 +15,7 @@ class UpdateFragmentViewComponent (
     mToDoViewModel: ToDoItemViewModel,
     navController: NavController,
     fragment: Fragment,
+    context: Context,
     toDoItem: ToDoItem
 ) {
 
@@ -22,6 +24,7 @@ class UpdateFragmentViewComponent (
         mSharedViewModel,
         mToDoViewModel,
         navController,
+        context,
         fragment,
         toDoItem
     )

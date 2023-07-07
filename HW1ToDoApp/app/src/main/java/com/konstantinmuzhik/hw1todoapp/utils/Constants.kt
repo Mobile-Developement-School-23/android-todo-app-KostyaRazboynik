@@ -1,5 +1,11 @@
 package com.konstantinmuzhik.hw1todoapp.utils
 
+/**
+ * Constants
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 object Constants {
     const val BASE_URL = "https://beta.mrdekk.ru/todobackend/"
     const val YANDEX_BASE_URL = "https://login.yandex.ru"

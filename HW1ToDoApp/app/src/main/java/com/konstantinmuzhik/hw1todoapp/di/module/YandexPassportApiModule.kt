@@ -8,6 +8,12 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * Module for Yandex Passport Api
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 @Module
 object YandexPassportApiModule {
 

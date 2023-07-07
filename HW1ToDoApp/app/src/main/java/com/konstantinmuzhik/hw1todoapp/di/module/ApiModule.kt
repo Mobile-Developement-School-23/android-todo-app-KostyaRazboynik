@@ -11,6 +11,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+/**
+ * Module for ToDoItem Api
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 @Module
 object ApiModule {
 

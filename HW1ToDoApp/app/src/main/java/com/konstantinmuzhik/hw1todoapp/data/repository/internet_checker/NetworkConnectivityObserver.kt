@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.utils.internet_checker
+package com.konstantinmuzhik.hw1todoapp.data.repository.internet_checker
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -10,6 +10,12 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 
+/**
+ * Network Connectivity Observer
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class NetworkConnectivityObserver (
     context: Context
 ) : ConnectivityObserver {

@@ -1,7 +1,8 @@
 package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.settings
 
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import com.konstantinmuzhik.hw1todoapp.R
@@ -10,11 +11,19 @@ import com.konstantinmuzhik.hw1todoapp.databinding.FragmentSettingsBinding
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.YandexAuthViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * Settings Fragment View Controller
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class SettingsViewController(
     private val binding: FragmentSettingsBinding,
     private val navController: NavController,
     private val sharedRepository: SharedPreferencesAppSettings,
-    private val viewModel: YandexAuthViewModel
+    private val viewModel: YandexAuthViewModel,
+    private val lifecycleOwner: LifecycleOwner,
+    private val fragment: Fragment
 ) {
 
     fun setUpViews() {
@@ -25,12 +34,12 @@ class SettingsViewController(
     }
 
     private fun collectAccountInfo() {
-//        lifecycleScope.launch {
-//            viewModel.accountInfo.collect {
-//                if (it != null) binding.loggedName.text = it
-//                else binding.loggedName.text = getString(R.string.guest_id)
-//            }
-//        }
+        lifecycleOwner.lifecycleScope.launch {
+            viewModel.accountInfo.collect {
+                if (it != null) binding.loggedName.text = it
+                else binding.loggedName.text = fragment.getString(R.string.guest_mode)
+            }
+        }
     }
 
     private fun setUpCloseButton() =

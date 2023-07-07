@@ -2,6 +2,12 @@ package com.konstantinmuzhik.hw1todoapp.data.yandex_passport.entities
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * Info Response for Yandex Passport
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 data class InfoResponse(
     @SerializedName("id") val id: String,
     @SerializedName("login") val login: String,

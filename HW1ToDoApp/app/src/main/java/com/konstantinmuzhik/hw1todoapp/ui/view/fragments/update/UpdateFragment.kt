@@ -21,7 +21,7 @@ import com.konstantinmuzhik.hw1todoapp.databinding.FragmentUpdateBinding
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.SharedViewHelper
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
 import com.konstantinmuzhik.hw1todoapp.utils.Constants.CURRENT_TASK_NAME
-import com.konstantinmuzhik.hw1todoapp.utils.internet_checker.ConnectivityObserver
+import com.konstantinmuzhik.hw1todoapp.data.repository.internet_checker.ConnectivityObserver
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -29,8 +29,15 @@ import java.util.Date
 import java.util.Locale
 
 
+/**
+ * Update Fragment
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class UpdateFragment : Fragment() {
-    private lateinit var binding: FragmentUpdateBinding
+    private var _binding: FragmentUpdateBinding? = null
+    private val binding get() = _binding!!
 
     private val mSharedViewHelper = SharedViewHelper
     private val mToDoViewModel: ToDoItemViewModel by activityViewModels { requireContext().appComponent.findViewModelFactory() }
@@ -46,7 +53,6 @@ class UpdateFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentUpdateBinding.inflate(layoutInflater)
         requireContext().appComponent.inject(this)
     }
 
@@ -56,6 +62,7 @@ class UpdateFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
 
+        _binding = FragmentUpdateBinding.inflate(layoutInflater)
         binding.args = args
         val toDoItem = args.currentItem
         if (savedInstanceState == null) {
@@ -153,15 +160,9 @@ class UpdateFragment : Fragment() {
             setPositiveButton(getString(R.string.yes_pos_btn)) { _, _ ->
                 if (mToDoViewModel.status.value == ConnectivityObserver.Status.Available)
                     mToDoViewModel.deleteRemoteTask(currentToDoItem.id)
-//                else Toast.makeText(
-//                        context, R.string.no_network_will_be_removed_later, Toast.LENGTH_SHORT
-//                    ).show()
 
-                Toast.makeText(
-                    requireContext(),
-                    "${getString(R.string.successfully_removed)}: '${currentToDoItem.title}'",
-                    Toast.LENGTH_SHORT
-                ).show()
+                makeToast("${getString(R.string.successfully_removed)}: '${currentToDoItem.title}'")
+
 
                 mToDoViewModel.deleteTask(currentToDoItem)
                 mToDoViewModel.clearTask()
@@ -196,113 +197,17 @@ class UpdateFragment : Fragment() {
         if (mSharedViewHelper.verifyDataFromUser(title)) {
             if (mToDoViewModel.status.value == ConnectivityObserver.Status.Available)
                 mToDoViewModel.createRemoteTask(currentToDoItem)
-//            else Toast.makeText(
-//                    context, R.string.no_network_will_be_updated_later, Toast.LENGTH_SHORT
-//                ).show()
 
             mToDoViewModel.updateTask(currentToDoItem)
 
-            Toast.makeText(
-                requireContext(), getString(R.string.successfully_added), Toast.LENGTH_SHORT
-            ).show()
+            makeToast(getString(R.string.successfully_updated))
 
             mToDoViewModel.clearTask()
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
-        } else Toast.makeText(
-            requireContext(), getString(R.string.fill_title), Toast.LENGTH_SHORT
-        ).show()
-    }
-}
+        } else makeToast(getString(R.string.fill_title))
 
-//package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.update
-//
-//import android.os.Bundle
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import androidx.fragment.app.Fragment
-//import androidx.fragment.app.viewModels
-//import androidx.lifecycle.lifecycleScope
-//import androidx.navigation.fragment.findNavController
-//import androidx.navigation.fragment.navArgs
-//import com.google.gson.Gson
-//import com.konstantinmuzhik.hw1todoapp.App
-//import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
-//import com.konstantinmuzhik.hw1todoapp.databinding.FragmentUpdateBinding
-//import com.konstantinmuzhik.hw1todoapp.ioc.update.UpdateFragmentComponent
-//import com.konstantinmuzhik.hw1todoapp.ioc.update.UpdateFragmentViewComponent
-//import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.settings.ViewModelFactory
-//import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.SharedViewHelper
-//import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
-//import com.konstantinmuzhik.hw1todoapp.utils.Constants.CURRENT_TO_DO_ITEM
-//import kotlinx.coroutines.launch
-//
-//
-//class UpdateFragment : Fragment() {
-//    private lateinit var binding: FragmentUpdateBinding
-//
-//    private lateinit var fragmentComponent: UpdateFragmentComponent
-//    private var fragmentViewComponent: UpdateFragmentViewComponent? = null
-//
-//    private val mSharedViewHelper = SharedViewHelper
-//    private val mToDoViewModel: ToDoItemViewModel by viewModels{
-//        ViewModelFactory{
-//            (requireActivity().application as App).getAppComponent().toDoItemViewModel()
-//        }
-//    }
-//
-//    private val args: UpdateFragmentArgs by navArgs()
-//    private var currentToDoItem = ToDoItem()
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        (requireActivity().application as App).getAppComponent().inject(this)
-//
-//        fragmentComponent = UpdateFragmentComponent(fragment = this)
-//
-//        binding = FragmentUpdateBinding.inflate(layoutInflater)
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//
-//        binding.args = args
-//        val toDoItem = args.currentItem
-//        if (savedInstanceState == null) {
-//            mToDoViewModel.loadToDoItem(toDoItem.id)
-//
-//            lifecycleScope.launch {
-//                mToDoViewModel.currentItem.collect {
-//                    currentToDoItem = it
-//                }
-//            }
-//        } else
-//            currentToDoItem =
-//                Gson().fromJson(
-//                    savedInstanceState.getString(CURRENT_TO_DO_ITEM),
-//                    ToDoItem::class.java
-//                )
-//
-//        fragmentViewComponent = UpdateFragmentViewComponent(
-//            binding,
-//            mSharedViewHelper,
-//            mToDoViewModel,
-//            navController = findNavController(),
-//            fragmentComponent.fragment,
-//            currentToDoItem
-//        ).apply {
-//            updateViewController.setUpViews()
-//        }
-//
-//        return binding.root
-//    }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        fragmentViewComponent = null
-//    }
-//
-//}
+    }
+
+    private fun makeToast(text: String) =
+        Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
+}

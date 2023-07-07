@@ -4,6 +4,13 @@ import com.konstantinmuzhik.hw1todoapp.data.datasource.remote.dto.ToDoItemNetwor
 import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 import java.util.Date
 
+
+/**
+ * Mapper ToDoItem <-> ToDoItemNetworkEntity
+ *
+ * @author Konstantin Kovalev
+ *
+ */
 object ToDoNetworkMapper {
 
     fun modelToNetworkEntity(toDoItem: ToDoItem, deviseId: String): ToDoItemNetworkEntity =

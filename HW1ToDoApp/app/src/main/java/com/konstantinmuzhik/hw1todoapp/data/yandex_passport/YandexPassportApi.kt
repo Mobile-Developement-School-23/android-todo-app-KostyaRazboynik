@@ -5,6 +5,12 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
 
+/**
+ * Api for Yandex Passport
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 interface YandexPassportApi {
 
     @GET("info")

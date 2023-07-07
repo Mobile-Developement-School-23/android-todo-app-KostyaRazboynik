@@ -1,13 +1,18 @@
-package com.konstantinmuzhik.hw1todoapp
+package com.konstantinmuzhik.hw1todoapp.ui.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.konstantinmuzhik.hw1todoapp.data.repository.ToDoItemsRepositoryImpl
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
-import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.YandexAuthViewModel
-import com.konstantinmuzhik.hw1todoapp.utils.internet_checker.NetworkConnectivityObserver
+import com.konstantinmuzhik.hw1todoapp.data.repository.internet_checker.NetworkConnectivityObserver
 import javax.inject.Inject
 
+/**
+ * View Model Factory
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class ViewModelFactory @Inject constructor(
     private val repositoryImpl: ToDoItemsRepositoryImpl,
     private val connectivityObserver: NetworkConnectivityObserver,

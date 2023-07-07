@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.ui.view
+package com.konstantinmuzhik.hw1todoapp.ui
 
 
 import android.widget.Spinner
@@ -7,7 +7,12 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.konstantinmuzhik.hw1todoapp.data.models.Priority
 import java.util.Date
 
-
+/**
+ * Data Binding
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class BindingAdapters {
 
     companion object {

@@ -5,7 +5,7 @@ import androidx.navigation.NavController
 import com.konstantinmuzhik.hw1todoapp.R
 import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
 import com.konstantinmuzhik.hw1todoapp.databinding.FragmentAuthBinding
-import com.konstantinmuzhik.hw1todoapp.ioc.auth.AuthFragmentComponent
+import com.konstantinmuzhik.hw1todoapp.ioc.fragments.auth.AuthFragmentComponent
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
 import com.konstantinmuzhik.hw1todoapp.utils.Constants
 import com.konstantinmuzhik.hw1todoapp.utils.Constants.REQUEST_LOGIN_SDK_CODE
@@ -13,6 +13,12 @@ import com.yandex.authsdk.YandexAuthException
 import com.yandex.authsdk.YandexAuthLoginOptions
 import com.yandex.authsdk.YandexAuthSdk
 
+/**
+ * Auth Fragment View Controller
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class AuthViewController (
     private val binding: FragmentAuthBinding,
     private val navController: NavController,

@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.konstantinmuzhik.hw1todoapp.data.repository.ToDoItemsRepositoryImpl
 import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 import com.konstantinmuzhik.hw1todoapp.domain.models.LoadingState
-import com.konstantinmuzhik.hw1todoapp.utils.internet_checker.ConnectivityObserver
-import com.konstantinmuzhik.hw1todoapp.utils.internet_checker.NetworkConnectivityObserver
+import com.konstantinmuzhik.hw1todoapp.data.repository.internet_checker.ConnectivityObserver
+import com.konstantinmuzhik.hw1todoapp.data.repository.internet_checker.NetworkConnectivityObserver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
@@ -23,6 +23,12 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * View Model for ToDoItem Repository
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class ToDoItemViewModel @Inject constructor(
     private val repository: ToDoItemsRepositoryImpl,
     private val connection: NetworkConnectivityObserver
@@ -41,7 +47,6 @@ class ToDoItemViewModel @Inject constructor(
 
     private val _loadingState =
         MutableStateFlow<LoadingState<Any>>(LoadingState.Success("Loaded from rood complete!"))
-    val loadingState: StateFlow<LoadingState<Any>> = _loadingState.asStateFlow()
 
     private var _currentItem = MutableStateFlow(ToDoItem())
     var currentItem = _currentItem.asStateFlow()

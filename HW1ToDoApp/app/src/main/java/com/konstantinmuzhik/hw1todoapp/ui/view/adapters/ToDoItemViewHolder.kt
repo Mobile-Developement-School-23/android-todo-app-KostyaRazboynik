@@ -13,6 +13,12 @@ import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.MainFragmentDirect
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+/**
+ * ToDoItem ViewHolder
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class ToDoItemViewHolder(private val binding: ToDoItemLayoutBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
@@ -21,22 +27,39 @@ class ToDoItemViewHolder(private val binding: ToDoItemLayoutBinding) :
     fun bind(toDoItem: ToDoItem, onItemChecked: (ToDoItem) -> Unit) {
         this.todoItem = toDoItem
 
-        binding.checkbox.apply {
-            setOnClickListener {
-                onItemChecked.invoke(toDoItem)
-            }
+        setUpCheckBox(onItemChecked)
+        setUpTitle()
+        setUpDate()
+        setUpCardView()
+    }
 
-            isChecked = toDoItem.done
-
-            buttonTintList = when (toDoItem.priority) {
-                Priority.HIGH -> ColorStateList.valueOf(this.context.getColor(R.color.color_light_red))
-                Priority.NO -> ColorStateList.valueOf(this.context.getColor(R.color.color_light_gray))
-                Priority.LOW -> ColorStateList.valueOf(this.context.getColor(R.color.color_light_green))
-            }
+    private fun setUpCardView() {
+        binding.relativeLayout.setOnClickListener {
+            it.findNavController()
+                .navigate(MainFragmentDirections.actionListFragmentToUpdateFragment(todoItem!!))
         }
+    }
 
+    private fun setUpDate() {
+        binding.date.apply {
+            if (todoItem!!.deadline != null && !todoItem!!.done) {
+                this.visibility = View.VISIBLE
+                this.text =
+                    this.context.getString(
+                        R.string.doItBefore,
+                        todoItem!!.deadline.let {
+                            SimpleDateFormat(
+                                "d MMMM",
+                                Locale.getDefault()
+                            ).format(it!!)
+                        })
+            } else this.visibility = View.GONE
+        }
+    }
+
+    private fun setUpTitle() {
         binding.title.apply {
-            paintFlags = if (toDoItem.done) {
+            paintFlags = if (todoItem!!.done) {
                 setTextColor(this.context.getColor(R.color.color_light_gray))
                 paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             } else {
@@ -46,30 +69,26 @@ class ToDoItemViewHolder(private val binding: ToDoItemLayoutBinding) :
 
             setOnClickListener {
                 this.findNavController()
-                    .navigate(MainFragmentDirections.actionListFragmentToUpdateFragment(toDoItem))
+                    .navigate(MainFragmentDirections.actionListFragmentToUpdateFragment(todoItem!!))
             }
 
-            text = toDoItem.title
+            text = todoItem!!.title
         }
+    }
 
-        binding.date.apply {
-            if (toDoItem.deadline != null && !toDoItem.done) {
-                this.visibility = View.VISIBLE
-                this.text =
-                    this.context.getString(
-                        R.string.doItBefore,
-                        toDoItem.deadline.let {
-                            SimpleDateFormat(
-                                "d MMMM",
-                                Locale.getDefault()
-                            ).format(it!!)
-                        })
-            } else this.visibility = View.GONE
-        }
+    private fun setUpCheckBox(onItemChecked: (ToDoItem) -> Unit) {
+        binding.checkbox.apply {
+            setOnClickListener {
+                onItemChecked.invoke(todoItem!!)
+            }
 
-        binding.relativeLayout.setOnClickListener {
-            it.findNavController()
-                .navigate(MainFragmentDirections.actionListFragmentToUpdateFragment(toDoItem))
+            isChecked = todoItem!!.done
+
+            buttonTintList = when (todoItem!!.priority) {
+                Priority.HIGH -> ColorStateList.valueOf(this.context.getColor(R.color.color_light_red))
+                Priority.NO -> ColorStateList.valueOf(this.context.getColor(R.color.color_light_gray))
+                Priority.LOW -> ColorStateList.valueOf(this.context.getColor(R.color.color_light_green))
+            }
         }
     }
 }

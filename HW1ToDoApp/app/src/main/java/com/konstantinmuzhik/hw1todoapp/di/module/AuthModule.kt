@@ -6,6 +6,12 @@ import com.yandex.authsdk.YandexAuthSdk
 import dagger.Module
 import dagger.Provides
 
+/**
+ * Module for Yandex Auth SDK
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 @Module
 object AuthModule {
 

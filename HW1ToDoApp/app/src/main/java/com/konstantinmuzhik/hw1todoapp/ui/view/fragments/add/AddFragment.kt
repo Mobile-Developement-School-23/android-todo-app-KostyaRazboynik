@@ -10,12 +10,18 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.konstantinmuzhik.hw1todoapp.appComponent
 import com.konstantinmuzhik.hw1todoapp.databinding.FragmentAddBinding
-import com.konstantinmuzhik.hw1todoapp.ioc.add.AddFragmentComponent
-import com.konstantinmuzhik.hw1todoapp.ioc.add.AddFragmentViewComponent
+import com.konstantinmuzhik.hw1todoapp.ioc.fragments.add.AddFragmentComponent
+import com.konstantinmuzhik.hw1todoapp.ioc.fragments.add.AddFragmentViewComponent
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.SharedViewHelper
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ToDoItemViewModel
 
 
+/**
+ * Add Fragment
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class AddFragment : Fragment() {
 
     private var _binding: FragmentAddBinding? = null

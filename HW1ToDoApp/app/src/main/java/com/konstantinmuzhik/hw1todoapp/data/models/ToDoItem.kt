@@ -4,6 +4,12 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.util.Date
 
+/**
+ * ToDoItem model
+ *
+ * @author Konstantin Kovalev
+ *
+ */
 @Parcelize
 data class ToDoItem(
     var id: String,

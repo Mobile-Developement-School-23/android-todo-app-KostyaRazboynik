@@ -13,10 +13,16 @@ import com.konstantinmuzhik.hw1todoapp.R
 import com.konstantinmuzhik.hw1todoapp.appComponent
 import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
 import com.konstantinmuzhik.hw1todoapp.utils.Constants
-import com.konstantinmuzhik.hw1todoapp.utils.PeriodWorkManager
+import com.konstantinmuzhik.hw1todoapp.data.PeriodWorkManager
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+/**
+ * Main Activity
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class MainActivity : AppCompatActivity() {
 
     @Inject

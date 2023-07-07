@@ -7,6 +7,12 @@ import com.konstantinmuzhik.hw1todoapp.ui.view.adapters.diffutil.ToDoItemDiffUti
 import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 import com.konstantinmuzhik.hw1todoapp.databinding.ToDoItemLayoutBinding
 
+/**
+ * ToDoItem Adapter
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 class ToDoAdapter(
     private val onItemChecked: (ToDoItem) -> Unit
 ) : ListAdapter<ToDoItem, ToDoItemViewHolder>(ToDoItemDiffUtilCallback()) {

@@ -1,6 +1,7 @@
-package com.konstantinmuzhik.hw1todoapp.ioc.add
+package com.konstantinmuzhik.hw1todoapp.ioc.fragments.add
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import com.konstantinmuzhik.hw1todoapp.databinding.FragmentAddBinding
 import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.add.AddViewController

@@ -8,6 +8,12 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+/**
+ * Database Module
+ *
+ * @author Kovalev Konstantin
+ *
+ */
 @Module
 object DataBaseModule {
 
