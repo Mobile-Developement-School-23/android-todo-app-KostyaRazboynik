@@ -1,0 +1,173 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.HW1ToDoApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant</item>
+        <item name="colorOnPrimary">@color/color_on_primary</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="colorSecondaryVariant">@color/color_secondary_variant</item>
+        <item name="colorOnSecondary">@color/color_on_secondary</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/status_bar_color</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.HW1ToDoApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.HW1ToDoApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="page_title">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="Switch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/color_light_blue</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/color_primary_variant</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">@color/color_light_gray_light</item>
+    </style>
+
+    <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <!-- just override the colors used in the default style -->
+        <item name="colorOnPrimary">@color/back_light_primary</item>
+        <item name="colorPrimary">@color/color_dark_blue</item>
+    </style>
+
+    <style name="Widget.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextAppearance">
+            @style/TextAppearance.TextInputLayout.HintText
+        </item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColorHint">?attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="TextAppearance.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_primary</item>
+    </style>
+
+    <style name="TextAppearance.CollapsingToolBar" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_primary</item>
+    </style>
+
+    <style name="TextAppearance.ExpandedToolBar" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="textAllCaps">true</item>
+        <item name="android:textSize">@dimen/title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/color_primary</item>
+    </style>
+
+    <style name="AlertDialogCustom" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <!-- Used for the buttons -->
+        <item name="colorPrimary">@color/color_light_red</item>
+        <!-- Used for the title and text -->
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.Body</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.Body</item>
+        <!-- Used for the background -->=
+        <item name="shapeAppearanceOverlay">@style/MaterialAlertDialogCorners</item>
+    </style>
+
+    <style name="MaterialAlertDialog.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/color_primary</item>
+    </style>
+
+    <style name="MaterialAlertDialogCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="MyTasksStyle">
+        <item name="collapsedTitleTextColor">@color/color_on_secondary</item>
+        <item name="contentScrim">@color/color_secondary</item>
+        <item name="expandedTitleMarginBottom">50dp</item>
+        <item name="expandedTitleTextColor">@color/color_on_secondary</item>
+    </style>
+
+    <style name="CountTasksDone">
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="Fab">
+        <item name="backgroundTint">@color/color_light_blue</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="ImageButtons">
+        <item name="tint">@color/color_on_secondary</item>
+    </style>
+
+    <style name="H1">
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:minLines">6</item>
+        <item name="android:textColorHint">@color/color_on_primary</item>
+        <item name="android:textCursorDrawable">@color/color_on_primary</item>
+        <item name="android:textSize">@dimen/title</item>
+    </style>
+
+    <style name="H2">
+        <item name="android:textColor">@color/color_on_secondary</item>
+        <item name="android:textSize">@dimen/meta</item>
+        <item name="android:gravity">start</item>
+        <item name="android:paddingStart">3dp</item>
+        <item name="android:paddingEnd">3dp</item>
+    </style>
+
+    <style name="H3">
+        <item name="android:textColor">@color/color_light_blue</item>
+        <item name="android:textSize">@dimen/body</item>
+    </style>
+
+    <style name="Date">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textSize">@dimen/date</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="Body">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textSize">@dimen/card_text</item>
+        <item name="android:textColor">@color/color_on_secondary</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="RadioButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">50dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="Snack_bar" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/color_on_secondary</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="tint">@color/color_on_secondary</item>
+
+
+
+    </style>
+
+
+
+
+</resources>

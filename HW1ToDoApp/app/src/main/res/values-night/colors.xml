@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_primary">@color/label_light_tertiary</color>
+    <color name="color_primary_variant">@color/label_light_tertiary</color>
+    <color name="color_on_primary">@color/color_light_gray</color>
+    <!-- Secondary brand color. -->
+    <color name="color_secondary">@color/back_dark_secondary</color>
+    <color name="color_secondary_variant">@color/color_dark_blue</color>
+    <color name="color_on_secondary">@color/color_light_gray</color>
+    <!-- Status bar color. -->
+    <color name="status_bar_color">@color/color_primary</color>
+
+</resources>

@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">ToDo</string>
+
+    <!-- main fragment -->
+    <string name="my_tasks">Moи задачи</string>
+    <string name="completed_title">Выполнено - %1$d</string>
+    <string name="doItBefore">Сделай до %1$s</string>
+
+    <!-- add and update fragments -->
+    <string name="task_title">Что нужно сделать?</string>
+    <string name="priority">Приоритет</string>
+    <string name="do_until">Сделать до</string>
+    <string name="creation_date">Дата создания:</string>
+    <string name="last_change_date">Последнее изменение:</string>
+
+    <string name="save">СОХРАНИТЬ</string>
+    <string name="create">ДОБАВИТЬ</string>
+    <string name="delete">Удалить</string>
+
+    <!-- Theme Selector-->
+    <string name="light">Светлая</string>
+    <string name="dark">Темная</string>
+    <string name="system">Системная</string>
+    <string name="logout">Выйти</string>
+
+    <!-- toasts -->
+    <string name="fill_title">Пожалуйста, заполните название задачи</string>
+    <string name="successfully_added">Добавлено!</string>
+    <string name="successfully_updated">Обновлено!</string>
+    <string name="successfully_removed">Удалено</string>
+
+    <!-- internet connection toasts -->
+    <string name="no_network_will_be_created_later">Нет интернета, будет создано позже</string>
+    <string name="no_network_will_be_updated_later">Нет интернета, будет обновлено позже</string>
+    <string name="no_network_will_be_removed_later">Нет интернета, будет удалено позже</string>
+    <string name="something_went_wrong_showing_local_data">Что-то пошло не так. Загрузка локальных данных</string>
+
+    <string name="losing_internet">Интерент пропадает!</string>
+    <string name="lost_internet">Интернет пропал!</string>
+    <string name="internet_unavailable">Интернет недоступен!</string>
+    <string name="internet_connected">Интернет подключен!</string>
+    <string name="merging_data">Загрузка данных</string>
+    <string name="no_internet_connection">Нет соединения с интернетом, попробуй позже</string>
+
+    <!-- delete alert dialog -->
+    <string name="delete_warning_title">Удалить</string>
+    <string name="delete_warning">Вы уверены, что хотите удалить:</string>
+
+    <!-- log out alert dialog-->
+    <string name="log_out_warning_title">Выйти</string>
+    <string name="log_out_warning">Вы уверены, что хотите выйти?</string>
+
+    <string name="yes_pos_btn">ДА</string>
+    <string name="no_neg_btn">НЕТ</string>
+
+    <!-- undo delete snack bar -->
+    <string name="undo">Отменить</string>
+    <string name="ok">ОК</string>
+    <string name="cancel">ОТМЕНА</string>
+    <string name="delete_task">Удалить %1$s?</string>
+
+
+    <!-- auth -->
+    <string name="yandex_id">Войти с Яндекс ID</string>
+    <string name="guest_id">Войти как гость</string>
+
+    <!-- settings -->
+    <string name="guest_mode">Гость</string>
+    <string name="show_notifications">Показывать уведомления</string>
+
+    <!-- priority -->
+    <string name="high_priority">Высокий приоритет</string>
+    <string name="no_priority">Нет</string>
+    <string name="low_priority">Низкий приоритет</string>
+
+    <string name="no">""</string>
+    <string name="high">Высокий</string>
+    <string name="low">Низкий</string>
+
+
+    <string-array name="priorities">
+        <item>Нет</item>
+        <item>Высокий приоритет</item>
+        <item>Низкий приоритет</item>
+    </string-array>
+
+</resources>
