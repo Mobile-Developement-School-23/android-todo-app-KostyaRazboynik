@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.ui.view.adapters.swipe
+package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.adapters.swipe
 
 import androidx.recyclerview.widget.RecyclerView
 import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem

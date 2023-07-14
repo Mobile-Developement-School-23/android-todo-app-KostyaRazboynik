@@ -1,9 +1,9 @@
-package com.konstantinmuzhik.hw1todoapp.ui.view.adapters
+package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.konstantinmuzhik.hw1todoapp.ui.view.adapters.diffutil.ToDoItemDiffUtilCallback
+import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.adapters.diffutil.ToDoItemDiffUtilCallback
 import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 import com.konstantinmuzhik.hw1todoapp.databinding.ToDoItemLayoutBinding
 

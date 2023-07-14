@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.ui.notifications
+package com.konstantinmuzhik.hw1todoapp.domain.notifications
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
@@ -56,13 +55,13 @@ class NotificationsReceiver : BroadcastReceiver() {
 
                 val notification: Notification = NotificationCompat.Builder(context, CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_yandex_logo)
-                    .setContentTitle("Остался час!")
+                    .setContentTitle(context.getString(R.string.hour_notification))
                     .setContentText(item.title)
                     .setAutoCancel(true)
                     .setContentIntent(deepLinkIntent(context, item.id))
                     .addAction(
                         NotificationCompat.Action(
-                            R.drawable.ic_delay, "Отложить на день",
+                            R.drawable.ic_delay, context.getString(R.string.postpone),
                             postponeIntent(context, item)
                         )
                     )
@@ -70,8 +69,7 @@ class NotificationsReceiver : BroadcastReceiver() {
                 scheduler.cancel(item.id)
                 manager.notify(item.id.hashCode(), notification)
             }
-        } catch (err: Exception) {
-            Log.d("exception", err.stackTraceToString())
+        } catch (_: Exception) {
         }
     }
 

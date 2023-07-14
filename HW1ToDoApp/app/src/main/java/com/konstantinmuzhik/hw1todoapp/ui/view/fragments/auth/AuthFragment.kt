@@ -56,7 +56,8 @@ class AuthFragment : Fragment() {
             sharedPreferences,
             viewModel,
             fragmentComponent.fragment,
-            yandexAuthSdk
+            yandexAuthSdk,
+            requireContext()
         ).apply {
             authViewController.setUpViews()
         }

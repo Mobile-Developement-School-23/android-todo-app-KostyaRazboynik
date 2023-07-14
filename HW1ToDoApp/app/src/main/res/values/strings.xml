@@ -53,6 +53,14 @@
     <string name="cancel">Cancel</string>
     <string name="delete_task">Delete %1$s?</string>
 
+    <!-- permission -->
+    <string name="permission_title">Permission to show notifications</string>
+    <string name="permission_message">Show notifications for upcoming events?</string>
+    <string name="permission_yes">Yes</string>
+    <string name="permission_no">No</string>
+    <string name="postpone">Postpone for a day</string>
+    <string name="hour_notification">An hour left!</string>
+
     <!-- auth -->
     <string name="yandex_id">Login with Yandex ID</string>
     <string name="guest_id">Login as а guest</string>

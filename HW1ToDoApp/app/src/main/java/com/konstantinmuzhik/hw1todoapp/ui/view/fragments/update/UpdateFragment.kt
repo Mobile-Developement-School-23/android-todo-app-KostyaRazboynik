@@ -1,12 +1,14 @@
 package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.update
 
 import android.app.AlertDialog
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -93,7 +95,10 @@ class UpdateFragment : Fragment() {
         binding.currentPrioritySp.onItemSelectedListener = mSharedViewHelper.spinnerListener
 
         binding.buttonDeleteTask.setOnClickListener {
+            it.backgroundTintList = ColorStateList.valueOf(getColor(requireContext(), R.color.color_dark_red))
             confirmItemRemoval(toDoItem)
+            it.backgroundTintList = ColorStateList.valueOf(getColor(requireContext(), R.color.color_light_red))
+
         }
 
         binding.saveBtn.setOnClickListener {

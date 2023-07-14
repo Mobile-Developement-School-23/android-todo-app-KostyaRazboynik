@@ -1,37 +1,34 @@
-package com.konstantinmuzhik.hw1todoapp.ui.notifications
+package com.konstantinmuzhik.hw1todoapp.domain.notifications
 
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
 import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 import com.konstantinmuzhik.hw1todoapp.domain.sheduler.NotificationsScheduler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 
 class NotificationsSchedulerImpl @Inject constructor(
     private val context: Context,
-    private val sharedPreferencesHelper: SharedPreferencesAppSettings
+    private val sharedPreferencesHelper: SharedPreferencesAppSettings,
 ) : NotificationsScheduler {
 
     private val alarmManager = context.getSystemService(AlarmManager::class.java)
 
     override fun schedule(item: ToDoItem) {
         if (item.deadline != null
-            && item.deadline!!.time >= System.currentTimeMillis()+3600000
+            && item.deadline!!.time >= System.currentTimeMillis() + ONE_HOUR_IN_MILLIS
             && !item.done
-            && sharedPreferencesHelper.getNotificationPermission()) {
+            && sharedPreferencesHelper.getNotificationPermission()
+        ) {
             val intent = Intent(context, NotificationsReceiver::class.java).apply {
                 putExtra("item", item.toString())
             }
             alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
-                //item.deadline!!.time-3600000,
-                System.currentTimeMillis()+10000,
+                System.currentTimeMillis() + 10000,
                 PendingIntent.getBroadcast(
                     context,
                     item.id.hashCode(),
@@ -41,12 +38,10 @@ class NotificationsSchedulerImpl @Inject constructor(
             )
             sharedPreferencesHelper.addNotification(item.id)
 
-        }else{
-            cancel(item.id)
-        }
+        } else cancel(item.id)
     }
 
-    override fun cancel(id:String) {
+    override fun cancel(id: String) {
         try {
             alarmManager.cancel(
                 PendingIntent.getBroadcast(
@@ -57,18 +52,16 @@ class NotificationsSchedulerImpl @Inject constructor(
                 )
             )
             sharedPreferencesHelper.removeNotification(id)
-        }catch (err:Exception){
-            Log.d("1", err.message.toString())
+        } catch (_: Exception) {
         }
     }
 
-
     override fun cancelAll() {
-        Log.d("1", sharedPreferencesHelper.getNotificationsId())
         val notifications = sharedPreferencesHelper.getNotificationsId().split(" ")
+        for (notification in notifications) cancel(notification)
+    }
 
-        for(notification in notifications){
-            cancel(notification)
-        }
+    companion object {
+        const val ONE_HOUR_IN_MILLIS = 3600000
     }
 }

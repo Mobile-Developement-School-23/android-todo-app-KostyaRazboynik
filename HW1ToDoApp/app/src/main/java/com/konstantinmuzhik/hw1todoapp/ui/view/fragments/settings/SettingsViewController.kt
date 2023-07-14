@@ -1,13 +1,10 @@
 package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.settings
 
-import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.view.ContextThemeWrapper
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -31,7 +28,7 @@ class SettingsViewController(
     private val viewModel: YandexAuthViewModel,
     private val lifecycleOwner: LifecycleOwner,
     private val context: Context,
-    fragment: Fragment
+    fragment: Fragment,
 ) {
 
     fun setUpViews() {
@@ -45,23 +42,19 @@ class SettingsViewController(
     private fun setUpPermissionBtn() {
         binding.autoDownloadSwitch.setOnCheckedChangeListener { _, checked ->
             binding.autoDownloadSwitch.isClickable = checked
-            if(!checked){
-                sharedRepository.setNotificationPermission(false)
-            }
+            if (!checked) sharedRepository.setNotificationPermission(false)
         }
 
-        if(sharedRepository.getNotificationPermission()){
+        if (sharedRepository.getNotificationPermission()) {
             binding.autoDownloadSwitch.isChecked = true
             binding.autoDownloadSwitch.isClickable = true
         }
 
         binding.autoDownload.setOnClickListener {
-            if(!binding.autoDownloadSwitch.isChecked){
-                if (Build.VERSION.SDK_INT >= 33) {
+            if (!binding.autoDownloadSwitch.isChecked) {
+                if (Build.VERSION.SDK_INT >= 33)
                     notificationPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-                } else {
-                    showSettingDialog()
-                }
+                else showSettingDialog()
             }
         }
     }
@@ -109,16 +102,6 @@ class SettingsViewController(
         binding.themeSelector.jumpDrawablesToCurrentState()
     }
 
-    private fun showNotification() {
-        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val notification = NotificationCompat.Builder(context.applicationContext, "channel_id")
-            .setContentText("notification")
-            .setContentTitle("NOTIFICATION")
-            .setSmallIcon(R.drawable.ic_yandex_logo)
-            .build()
-        manager.notify(1, notification)
-    }
-
     private val notificationPermissionLauncher =
         fragment.registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             sharedRepository.setNotificationPermission(isGranted)
@@ -132,13 +115,13 @@ class SettingsViewController(
                 R.style.AlertDialogCustom
             )
         )
-            .setTitle("Разрешение на показ уведомлений")
-            .setMessage("Показывать уведомления о ближайших событиях?")
-            .setPositiveButton("Да") { _, _ ->
+            .setTitle(context.getString(R.string.permission_title))
+            .setMessage(context.getString(R.string.permission_message))
+            .setPositiveButton(context.getString(R.string.permission_yes)) { _, _ ->
                 sharedRepository.setNotificationPermission(true)
                 binding.autoDownloadSwitch.isChecked = true
             }
-            .setNegativeButton("Нет") { _, _ ->
+            .setNegativeButton(context.getString(R.string.permission_no)) { _, _ ->
                 sharedRepository.setNotificationPermission(false)
             }
             .show()

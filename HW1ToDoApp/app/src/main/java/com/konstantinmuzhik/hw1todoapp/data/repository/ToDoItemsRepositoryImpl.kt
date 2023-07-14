@@ -6,7 +6,7 @@ import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 import com.konstantinmuzhik.hw1todoapp.domain.models.DataState
 import com.konstantinmuzhik.hw1todoapp.domain.models.UiState
 import com.konstantinmuzhik.hw1todoapp.domain.repository.Repository
-import com.konstantinmuzhik.hw1todoapp.ui.notifications.NotificationsSchedulerImpl
+import com.konstantinmuzhik.hw1todoapp.domain.notifications.NotificationsSchedulerImpl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
-import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
 import com.konstantinmuzhik.hw1todoapp.databinding.FragmentMainBinding
 import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.MainViewController
 import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.MainViewModel

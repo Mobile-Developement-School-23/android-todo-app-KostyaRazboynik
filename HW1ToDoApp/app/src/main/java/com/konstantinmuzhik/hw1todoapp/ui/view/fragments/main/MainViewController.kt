@@ -20,9 +20,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.konstantinmuzhik.hw1todoapp.R
 import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem
 import com.konstantinmuzhik.hw1todoapp.databinding.FragmentMainBinding
-import com.konstantinmuzhik.hw1todoapp.ui.view.adapters.ToDoAdapter
-import com.konstantinmuzhik.hw1todoapp.ui.view.adapters.swipe.SwipeCallbackInterface
-import com.konstantinmuzhik.hw1todoapp.ui.view.adapters.swipe.SwipeHelper
+import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.adapters.ToDoAdapter
+import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.adapters.swipe.SwipeCallbackInterface
+import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.adapters.swipe.SwipeHelper
 import com.konstantinmuzhik.hw1todoapp.data.repository.internet_checker.ConnectivityObserver
 import com.konstantinmuzhik.hw1todoapp.domain.models.UiState
 import kotlinx.coroutines.flow.collectLatest
@@ -143,11 +143,10 @@ class MainViewController(
             navController.navigate(R.id.action_listFragment_to_addFragment)
         }
 
-    // TODO load network list
     private fun swipeRefreshListener() =
         binding.swipeLayout.setOnRefreshListener {
             if (internetState == ConnectivityObserver.Status.Available) {
-                //viewModel.loadNetworkList()
+                viewModel.loadNetworkList()
 
                 makeSnackBar(context.getString(R.string.merging_data)).show()
             } else makeSnackBar(context.getString(R.string.no_internet_connection)).show()
@@ -188,12 +187,10 @@ class MainViewController(
             )
         }
 
-
-    // TODO  loadNetworkList
     private fun updateNetworkState(status: ConnectivityObserver.Status) {
         when (status) {
             ConnectivityObserver.Status.Available -> if (internetState != status)
-            //viewModel.loadNetworkList()
+            viewModel.loadNetworkList()
 
             else -> if (internetState != status) makeToast(context.getString(R.string.lost_internet))
         }

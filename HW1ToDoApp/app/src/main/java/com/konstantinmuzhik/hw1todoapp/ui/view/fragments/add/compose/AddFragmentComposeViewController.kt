@@ -27,7 +27,6 @@ fun AddFragmentComposeViewController(
     val priority = todoItem.priority
     val deadline = todoItem.deadline
 
-
     Scaffold(
         topBar = { TodoEditorToolbar(text = text, onAction = onAction) },
         containerColor = AppTheme.colors.backPrimary

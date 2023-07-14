@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.ui.view.adapters
+package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.adapters
 
 import android.content.res.ColorStateList
 import android.graphics.Paint

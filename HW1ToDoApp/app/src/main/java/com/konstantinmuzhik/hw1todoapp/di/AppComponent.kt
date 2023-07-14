@@ -12,8 +12,8 @@ import com.konstantinmuzhik.hw1todoapp.di.module.NetworkModule
 import com.konstantinmuzhik.hw1todoapp.di.module.NetworkObserver
 import com.konstantinmuzhik.hw1todoapp.di.module.RepositoryModule
 import com.konstantinmuzhik.hw1todoapp.di.module.WorkManagerModule
-import com.konstantinmuzhik.hw1todoapp.ui.notifications.NotificationPostponeReceiver
-import com.konstantinmuzhik.hw1todoapp.ui.notifications.NotificationsReceiver
+import com.konstantinmuzhik.hw1todoapp.domain.notifications.NotificationPostponeReceiver
+import com.konstantinmuzhik.hw1todoapp.domain.notifications.NotificationsReceiver
 import com.konstantinmuzhik.hw1todoapp.ui.viewmodels.ViewModelFactory
 import com.konstantinmuzhik.hw1todoapp.ui.view.activity.MainActivity
 import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.add.xml.AddFragment

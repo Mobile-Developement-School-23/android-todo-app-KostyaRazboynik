@@ -34,10 +34,10 @@
         </activity>
 
         <receiver
-            android:name=".ui.notifications.NotificationPostponeReceiver"
+            android:name=".domain.notifications.NotificationPostponeReceiver"
             android:enabled="true" />
         <receiver
-            android:name=".ui.notifications.NotificationsReceiver"
+            android:name=".domain.notifications.NotificationsReceiver"
             android:enabled="true" />
     </application>
 

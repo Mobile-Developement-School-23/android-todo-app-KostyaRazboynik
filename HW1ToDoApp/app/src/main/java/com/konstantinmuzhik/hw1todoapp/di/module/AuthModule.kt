@@ -1,7 +1,7 @@
 package com.konstantinmuzhik.hw1todoapp.di.module
 
 import android.content.Context
-import com.konstantinmuzhik.hw1todoapp.data.yandex_passport.YandexPassportApi
+import com.konstantinmuzhik.hw1todoapp.data.datasource.yandex_passport.YandexPassportApi
 import com.konstantinmuzhik.hw1todoapp.utils.Constants
 import com.yandex.authsdk.YandexAuthOptions
 import com.yandex.authsdk.YandexAuthSdk

@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.data.yandex_passport.entities
+package com.konstantinmuzhik.hw1todoapp.data.datasource.yandex_passport.entities
 
 import com.google.gson.annotations.SerializedName
 

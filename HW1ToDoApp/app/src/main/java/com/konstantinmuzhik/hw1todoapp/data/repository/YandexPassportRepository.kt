@@ -1,8 +1,8 @@
 package com.konstantinmuzhik.hw1todoapp.data.repository
 
 import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
-import com.konstantinmuzhik.hw1todoapp.data.yandex_passport.YandexPassportApi
-import com.konstantinmuzhik.hw1todoapp.data.yandex_passport.entities.InfoResponse
+import com.konstantinmuzhik.hw1todoapp.data.datasource.yandex_passport.YandexPassportApi
+import com.konstantinmuzhik.hw1todoapp.data.datasource.yandex_passport.entities.InfoResponse
 import javax.inject.Inject
 
 /**

@@ -67,15 +67,11 @@ class SharedPreferencesAppSettings @Inject constructor(
     fun getNotificationsId(): String =
         sharedPreferences.getString("notifications", "").toString()
 
-    fun removeNotification(id:String){
-        val s = getNotificationsId()
-        val arr = ArrayList(s.split(" "))
-        if(arr.contains(id)){
-            arr.remove(id)
-        }
-        val res = arr.fold("") { previous, next -> "$previous $next" }
-        editor.putString("notifications", res)
-        editor.apply()
+    fun removeNotification(id: String) {
+        val arr = ArrayList(getNotificationsId().split(" "))
+        if (arr.contains(id)) arr.remove(id)
+        editor.putString("notifications", arr.fold("") { previous, next -> "$previous $next" })
+            .apply()
     }
 
     companion object {

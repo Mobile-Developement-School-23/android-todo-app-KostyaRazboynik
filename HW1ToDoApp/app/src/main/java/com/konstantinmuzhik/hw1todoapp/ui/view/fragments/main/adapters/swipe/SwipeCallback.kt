@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.ui.view.adapters.swipe
+package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.adapters.swipe
 
 import android.content.Context
 import android.graphics.Canvas
@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.konstantinmuzhik.hw1todoapp.R
-import com.konstantinmuzhik.hw1todoapp.ui.view.adapters.ToDoItemViewHolder
+import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.adapters.ToDoItemViewHolder
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 /**

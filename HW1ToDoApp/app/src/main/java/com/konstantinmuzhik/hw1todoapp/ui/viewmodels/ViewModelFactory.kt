@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.konstantinmuzhik.hw1todoapp.data.repository.ToDoItemsRepositoryImpl
 import com.konstantinmuzhik.hw1todoapp.data.repository.YandexPassportRepository
 import com.konstantinmuzhik.hw1todoapp.data.repository.internet_checker.NetworkConnectivityObserver
-import com.konstantinmuzhik.hw1todoapp.ui.notifications.NotificationsSchedulerImpl
+import com.konstantinmuzhik.hw1todoapp.domain.notifications.NotificationsSchedulerImpl
 import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.add.compose.ToDoItemViewModelCompose
 import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.auth.AuthViewModel
 import com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.MainViewModel

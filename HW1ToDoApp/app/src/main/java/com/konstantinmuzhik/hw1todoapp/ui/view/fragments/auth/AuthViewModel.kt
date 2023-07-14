@@ -2,7 +2,7 @@ package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.auth
 
 import androidx.lifecycle.ViewModel
 import com.konstantinmuzhik.hw1todoapp.data.repository.ToDoItemsRepositoryImpl
-import com.konstantinmuzhik.hw1todoapp.ui.notifications.NotificationsSchedulerImpl
+import com.konstantinmuzhik.hw1todoapp.domain.notifications.NotificationsSchedulerImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

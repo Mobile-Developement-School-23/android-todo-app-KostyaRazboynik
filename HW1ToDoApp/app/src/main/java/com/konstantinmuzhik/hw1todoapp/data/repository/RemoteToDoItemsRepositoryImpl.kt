@@ -1,6 +1,5 @@
 package com.konstantinmuzhik.hw1todoapp.data.repository
 
-import android.util.Log
 import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
 import com.konstantinmuzhik.hw1todoapp.data.datasource.remote.ToDoItemApi
 import com.konstantinmuzhik.hw1todoapp.data.datasource.remote.data_mapper.ToDoNetworkMapper
@@ -14,10 +13,7 @@ import com.konstantinmuzhik.hw1todoapp.domain.models.DataState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
 import retrofit2.Response
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 import javax.inject.Inject
 
 class RemoteToDoItemsRepositoryImpl @Inject constructor(
@@ -28,18 +24,11 @@ class RemoteToDoItemsRepositoryImpl @Inject constructor(
     suspend fun getMergedToDoItems(currentList: List<ToDoItem>): Flow<DataState<List<ToDoItem>>> =
         flow {
             try {
-                val token = sharedPreferences.getCurrentToken()
-                val networkListResponse = service.getList(token = token)
-
-                Log.d("LIST CALLED", "")
-
-                createMergedList(currentList, networkListResponse)
-                Log.d("LIST MERGED FINAL", "")
-                Log.d("createMergedList", "created")
-
-
+                createMergedList(
+                    currentList,
+                    service.getList(token = sharedPreferences.getCurrentToken())
+                )
             } catch (exception: Exception) {
-                Log.d("EXCEPTION1", exception.toString())
                 emit(DataState.Exception(exception))
             }
         }
@@ -49,7 +38,6 @@ class RemoteToDoItemsRepositoryImpl @Inject constructor(
         networkListResponse: Response<ToDoItemListResponse>,
     ): Flow<DataState<List<ToDoItem>>> = flow {
         if (networkListResponse.isSuccessful) {
-            Log.d("SUCCES 1", "")
             val body = networkListResponse.body()
             if (body != null) {
                 val networkList = body.list.map { ToDoNetworkMapper.networkEntityToModel(it) }
@@ -61,9 +49,6 @@ class RemoteToDoItemsRepositoryImpl @Inject constructor(
                             deviseId = sharedPreferences.getDeviceId()
                         )
                     }
-                Log.d("LIST MERGED PRE FINAL", "")
-
-
                 emitAll(updateRemoteToDoItems(mergedList))
             }
         } else networkListResponse.errorBody()?.close()
@@ -86,8 +71,6 @@ class RemoteToDoItemsRepositoryImpl @Inject constructor(
                 mergedMap[item.id] = item
         }
         sharedPreferences.putRevisionId(revision)
-        Log.d("REVISION PUT", "")
-
         return mergedMap
     }
 
@@ -162,36 +145,27 @@ class RemoteToDoItemsRepositoryImpl @Inject constructor(
             itemId = id
         )
 
-    // TODO
     suspend fun createRemoteToDoItem(newToDoItem: ToDoItem) {
         try {
             val response = createAddResponse(newToDoItem)
             if (response.isSuccessful) {
                 val responseBody = response.body()
                 if (responseBody != null) sharedPreferences.putRevisionId(responseBody.revision)
-                Log.d("created Task", "АХУЙ")
             }
         } catch (_: Exception) {
         }
     }
 
-    private suspend fun createAddResponse(newToDoItem: ToDoItem): Response<ToDoItemResponse> {
-        val token = sharedPreferences.getCurrentToken()
-        val rev = sharedPreferences.getRevisionId()
-
-        val s = ToDoNetworkMapper.modelToNetworkEntity(
-            newToDoItem,
-            sharedPreferences.getDeviceId()
+    private suspend fun createAddResponse(newToDoItem: ToDoItem): Response<ToDoItemResponse> =
+        service.addToDoItem(
+            lastKnownRevision = sharedPreferences.getRevisionId(),
+            token = sharedPreferences.getCurrentToken(),
+            newItem = ToDoItemRequest(
+                ToDoNetworkMapper.modelToNetworkEntity(
+                    newToDoItem,
+                    sharedPreferences.getDeviceId()
+                )
+            )
         )
-        val request = ToDoItemRequest(s)
-        val res =  service.addToDoItem(
-            lastKnownRevision = rev,
-            token = token,
-            newItem = request
-
-        )
-        Log.d("RESULT", res.isSuccessful.toString())
-        return res
-    }
 
 }

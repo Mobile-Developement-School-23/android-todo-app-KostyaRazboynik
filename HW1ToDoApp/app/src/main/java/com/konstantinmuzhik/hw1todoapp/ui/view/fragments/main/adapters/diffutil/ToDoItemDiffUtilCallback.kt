@@ -1,4 +1,4 @@
-package com.konstantinmuzhik.hw1todoapp.ui.view.adapters.diffutil
+package com.konstantinmuzhik.hw1todoapp.ui.view.fragments.main.adapters.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
 import com.konstantinmuzhik.hw1todoapp.data.models.ToDoItem

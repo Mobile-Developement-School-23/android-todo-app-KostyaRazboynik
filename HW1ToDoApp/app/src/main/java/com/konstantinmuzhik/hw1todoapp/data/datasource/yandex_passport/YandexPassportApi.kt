@@ -1,6 +1,6 @@
-package com.konstantinmuzhik.hw1todoapp.data.yandex_passport
+package com.konstantinmuzhik.hw1todoapp.data.datasource.yandex_passport
 
-import com.konstantinmuzhik.hw1todoapp.data.yandex_passport.entities.InfoResponse
+import com.konstantinmuzhik.hw1todoapp.data.datasource.yandex_passport.entities.InfoResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header

@@ -1,5 +1,6 @@
 package com.konstantinmuzhik.hw1todoapp.ioc.fragments.auth
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.konstantinmuzhik.hw1todoapp.data.datasource.SharedPreferencesAppSettings
@@ -14,7 +15,8 @@ class AuthFragmentViewComponent (
     sharedPreferencesRepository: SharedPreferencesAppSettings,
     viewModel: AuthViewModel,
     fragment: Fragment,
-    sdk: YandexAuthSdk
+    sdk: YandexAuthSdk,
+    context: Context
 ) {
 
     val authViewController = AuthViewController(
@@ -24,5 +26,6 @@ class AuthFragmentViewComponent (
         sdk,
         viewModel,
         fragment,
+        context
     )
 }
