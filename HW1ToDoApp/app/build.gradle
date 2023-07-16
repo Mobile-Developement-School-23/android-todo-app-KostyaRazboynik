@@ -1,0 +1,168 @@
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+
+
+android {
+    namespace 'com.konstantinmuzhik.hw1todoapp'
+
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.konstantinmuzhik.hw1todoapp"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [YANDEX_CLIENT_ID: "0d0970774e284fa8ba9ff70b6b06479a"]
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures{
+        dataBinding = true
+        viewBinding = true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.4.7"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    kapt {
+        generateStubs = true
+    }
+
+
+}
+
+dependencies {
+
+    def room_version = "2.5.2"
+    def nav_version = "2.6.0"
+    def ktor_version = "2.3.1"
+    def retrofit_version = "2.9.0"
+    def dagger_version = "2.46.1"
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // Work manager
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+
+    // Yandex authSDK
+    implementation "com.yandex.android:authsdk:2.5.1"
+
+    //Datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    // Room components
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // Lifecycle components
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.6.1"
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+
+    // DataBinding
+    kapt "androidx.databinding:databinding-common:8.0.2"
+
+    // Navigation Component
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Kotlin Coroutines
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2"
+
+    // Dagger DI
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // Hilt DI
+//    implementation 'com.google.dagger:hilt-android:2.44'
+//    kapt 'com.google.dagger:hilt-compiler:2.44'
+
+    // Lottie animation
+//    implementation "com.airbnb.android:lottie:6.0.1"
+//    implementation 'com.daimajia.androidanimations:library:2.4@aar'
+
+    // Java Faker
+//    implementation 'com.github.javafaker:javafaker:1.0.2'
+
+    // swipe decorator
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.4'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+//    implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
+//    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    // OK HTTP
+    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.1"
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.1'
+
+    //Ktor
+//    implementation "io.ktor:ktor-client-core:$ktor_version"
+//    implementation "io.ktor:ktor-client-cio:$ktor_version"
+//    implementation "io.ktor:ktor-client-content-negotiation:$ktor_version"
+//    implementation "io.ktor:ktor-serialization-kotlinx-json:$ktor_version"
+//    implementation "org.slf4j:slf4j-nop:2.0.7"
+
+    // Jackson
+//    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.11.1'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // Compose
+    def version = "1.4.3"
+    def material3Version = "1.1.1"
+    def navigationVersion = "2.6.0"
+    def lifecycleRuntimeVersion = "2.6.1"
+
+    implementation "androidx.compose.ui:ui:$version"
+    implementation "androidx.compose.material:material:$version"
+    implementation "androidx.compose.material3:material3:$material3Version"
+    implementation "androidx.navigation:navigation-compose:$navigationVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:$lifecycleRuntimeVersion"
+    implementation 'androidx.compose.ui:ui-tooling:1.4.3'
+
+
+
+
+}

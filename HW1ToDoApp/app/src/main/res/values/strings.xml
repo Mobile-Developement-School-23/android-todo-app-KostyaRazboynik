@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">ToDo</string>
+
+    <!-- main fragment -->
+    <string name="my_tasks">My tasks</string>
+    <string name="completed_title">Completed - %1$d</string>
+    <string name="doItBefore">Do it before %1$s</string>
+
+    <!-- add and update fragments -->
+    <string name="task_title">What should be done?</string>
+    <string name="priority">Priority</string>
+    <string name="do_until">Do until</string>
+    <string name="creation_date">Date of creation:</string>
+    <string name="last_change_date">Last change:</string>
+
+    <string name="save">SAVE</string>
+    <string name="create">CREATE</string>
+    <string name="delete">Delete</string>
+
+    <!-- toasts -->
+    <string name="fill_title">Please fill out the title</string>
+    <string name="successfully_added">Successfully Added!</string>
+    <string name="successfully_updated">Successfully Updated!</string>
+    <string name="successfully_removed">Successfully Removed</string>
+
+    <!-- internet connection toasts -->
+    <string name="no_network_will_be_created_later">No network, will be created later</string>
+    <string name="no_network_will_be_updated_later">No network, will be updated later</string>
+    <string name="no_network_will_be_removed_later">No network, will be removed later</string>
+    <string name="something_went_wrong_showing_local_data">Something went wrong, showing local data</string>
+
+    <string name="losing_internet">Losing Internet!</string>
+    <string name="lost_internet">Internet Lost!</string>
+    <string name="internet_unavailable">Internet unavailable!</string>
+    <string name="internet_connected">Connected!</string>
+    <string name="merging_data">Merging data</string>
+    <string name="no_internet_connection">No internet connection, try later</string>
+
+    <!-- delete alert dialog -->
+    <string name="delete_warning_title">Delete</string>
+    <string name="delete_warning">Are you sure you want to remove:</string>
+
+    <!-- log out alert dialog-->
+    <string name="log_out_warning_title">LOGOUT</string>
+    <string name="log_out_warning">Are you sure you want to log out?</string>
+
+    <string name="no_neg_btn">NO</string>
+    <string name="yes_pos_btn">YES</string>
+
+    <!-- undo delete snack bar -->
+    <string name="undo">Undo</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_task">Delete %1$s?</string>
+
+    <!-- permission -->
+    <string name="permission_title">Permission to show notifications</string>
+    <string name="permission_message">Show notifications for upcoming events?</string>
+    <string name="permission_yes">Yes</string>
+    <string name="permission_no">No</string>
+    <string name="postpone">Postpone for a day</string>
+    <string name="hour_notification">An hour left!</string>
+
+    <!-- auth -->
+    <string name="yandex_id">Login with Yandex ID</string>
+    <string name="guest_id">Login as а guest</string>
+
+    <!-- settings -->
+    <string name="guest_mode">Guest</string>
+    <string name="show_notifications">Show notifications</string>
+    <!-- Theme Selector-->
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="system">System</string>
+
+    <!-- priority -->
+    <string name="high_priority">High Priority</string>
+    <string name="no_priority">No</string>
+    <string name="low_priority">Low Priority</string>
+
+    <string name="no">""</string>
+    <string name="high">High</string>
+    <string name="low">Low</string>
+    <string name="_5" translatable="false">5</string>
+
+    <string-array name="priorities">
+        <item>No</item>
+        <item>High Priority</item>
+        <item>Low Priority</item>
+    </string-array>
+
+</resources>
