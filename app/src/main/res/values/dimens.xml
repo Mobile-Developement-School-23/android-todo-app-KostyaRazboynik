@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_bar_height">100dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="title">20sp</dimen>
+    <dimen name="meta">17sp</dimen>
+    <dimen name="body">15sp</dimen>
+    <dimen name="date">11sp</dimen>
+    <dimen name="card_text">16sp</dimen>
+    <dimen name="guest">18sp</dimen>
+
+</resources>
