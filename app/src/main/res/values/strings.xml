@@ -68,6 +68,8 @@
     <!-- settings -->
     <string name="guest_mode">Guest</string>
     <string name="show_notifications">Show notifications</string>
+    <string name="notification_option">Notifications: %1$s</string>
+
     <!-- Theme Selector-->
     <string name="light">Light</string>
     <string name="dark">Dark</string>
@@ -89,4 +91,15 @@
         <item>Low Priority</item>
     </string-array>
 
+    <string-array name="notification_labels">
+        <item>Day before deadline</item>
+        <item>Hour before deadline</item>
+        <item>Time of the deadline</item>
+    </string-array>
+
+    <string-array name="notification_options">
+        <item>day</item>
+        <item>hour</item>
+        <item>deadline</item>
+    </string-array>
 </resources>

@@ -31,6 +31,7 @@ object Constants {
     // notification
     const val GLOBAL_INTENT_STRING_EXTRA_NAME = "id"
     const val NOTIFICATIONS_PERMISSION_KEY = "notification_permission"
+    const val DAY_NOTICE = "day"
 
     // theme
     const val THEME_NIGHT_NO = 0

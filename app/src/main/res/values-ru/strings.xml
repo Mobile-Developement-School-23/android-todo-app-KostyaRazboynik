@@ -74,6 +74,7 @@
     <!-- settings -->
     <string name="guest_mode">Гость</string>
     <string name="show_notifications">Показывать уведомления</string>
+    <string name="notification_option">Уведомления: %1$s</string>
 
     <!-- priority -->
     <string name="high_priority">Высокий приоритет</string>
@@ -89,6 +90,12 @@
         <item>Нет</item>
         <item>Высокий приоритет</item>
         <item>Низкий приоритет</item>
+    </string-array>
+
+    <string-array name="notification_labels">
+        <item>За час до дедлайна</item>
+        <item>За день до дедлайна</item>
+        <item>В момент дедлайна</item>
     </string-array>
 
 </resources>

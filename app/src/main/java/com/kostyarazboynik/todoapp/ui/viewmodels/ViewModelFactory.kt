@@ -39,7 +39,7 @@ class ViewModelFactory @Inject constructor(
 
             ToDoItemViewModel::class.java -> ToDoItemViewModel(repositoryImpl, coroutineScope)
 
-            YandexAuthViewModel::class.java -> YandexAuthViewModel(yandexPassportRepository, sharedPreferences)
+            YandexAuthViewModel::class.java -> YandexAuthViewModel(yandexPassportRepository,repositoryImpl, sharedPreferences, coroutineScope)
 
             ToDoItemViewModelCompose::class.java -> ToDoItemViewModelCompose(repositoryImpl, coroutineScope)
 

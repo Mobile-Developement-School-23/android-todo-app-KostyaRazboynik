@@ -1,6 +1,7 @@
 package com.kostyarazboynik.todoapp.ui.view.fragments.update
 
 import android.app.AlertDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.view.ContextThemeWrapper
 import android.view.View
@@ -72,7 +73,7 @@ class UpdateViewController(
     private fun setUpDeadlineText() {
         binding.currentDeadlineDate.text =
             if (args.currentItem.deadline != null) SimpleDateFormat(
-                "dd-MM-yyyy",
+                "dd-MM-yyyy HH:mm",
                 Locale.getDefault()
             ).format(args.currentItem.deadline!!) else ""
     }
@@ -108,8 +109,6 @@ class UpdateViewController(
         binding.currentDeadlineSw.setOnClickListener {
             if (binding.currentDeadlineSw.isChecked) {
                 binding.currentDeadlineSw.visibility = View.VISIBLE
-                binding.currentDeadlineSw.text =
-                    SimpleDateFormat("d MMMM y", Locale.getDefault()).format(Date())
                 showDateTimePicker()
             } else deleteDate()
         }
@@ -129,11 +128,25 @@ class UpdateViewController(
         val date = calendar.time
 
         binding.currentDeadlineDate.visibility = View.VISIBLE
-        binding.currentDeadlineDate.text =
-            SimpleDateFormat("d MMMM y", Locale.getDefault()).format(date)
 
-        deadlineDate = date
-        deadlineChanged = true
+        showTimePicker(date)
+    }
+
+    private fun showTimePicker(date: Date) = TimePickerDialog(
+        context,
+        R.style.MaterialCalendarTheme,
+        { _, hourOfDay, minute ->
+
+            deadlineDate = Date(date.time + hourOfDay * 3600000 + minute * 60000)
+            binding.currentDeadlineDate.text =
+                SimpleDateFormat("d MMMM y HH:mm", Locale.getDefault()).format(deadlineDate!!)
+            deadlineChanged = true
+        }, 0, 0, true
+    ).apply {
+        setOnCancelListener {
+            deleteDate()
+        }
+        show()
     }
 
     private fun deleteDate() {
@@ -171,6 +184,7 @@ class UpdateViewController(
 
         navController.popBackStack()
     }
+
     private fun confirmItemRemoval(toDoItem: ToDoItem) =
         AlertDialog.Builder(
             ContextThemeWrapper(context, R.style.AlertDialogCustom)

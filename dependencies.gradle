@@ -1,0 +1,125 @@
+ext {
+    versions = [
+            room                           : "2.5.2",
+            yandex_authsdk                 : "2.5.1",
+            worker                         : "2.8.1",
+            datastore                      : "1.0.0",
+            databinding                    : "8.0.2",
+            coroutines                     : "1.7.2",
+            navigate                       : "2.6.0",
+            dagger                         : "2.46.1",
+            okhttp3                        : "5.0.0-alpha.1",
+            retrofit2                      : "2.9.0",
+            converter_jackson              : "2.9.0",
+            converter_gson                 : "2.9.0",
+            converter_scalars              : "2.3.0",
+            ktor                           : "2.3.1",
+            compose_version                : "1.4.3",
+            compose_material3Version       : "1.1.1",
+            compose_navigationVersion      : "2.6.0",
+            compose_lifecycleRuntimeVersion: "2.6.1",
+            compose_ui_tooling             : "1.4.3",
+            swipe_decorator                : "1.4",
+            gson                           : "2.10.1",
+            jackson                        : "2.11.1",
+            lottie                         : "6.0.1",
+            daimajia                       : "2.4@aar",
+            google_material                : "1.9.0",
+            androidx_junit                 : "1.1.5",
+            junit                          : "4.13.2",
+            lifecycle_livedata             : "2.6.1",
+            lifecycle_viewmodel            : "2.6.1",
+            lifecycle_extensions           : "2.2.0",
+            lifecycle_common               : "2.6.1",
+            lifecycle_runtime              : "2.6.1",
+            core                           : "1.10.1",
+            legacy_support                 : "1.0.0",
+            coordinatorlayout              : "1.2.0",
+            constraintlayout               : "2.1.4",
+            appcompat                      : "1.6.1",
+            espresso                       : "3.5.1"
+
+
+    ]
+    room = [
+            runtime : "androidx.room:room-runtime:$versions.room",
+            ktx     : "androidx.room:room-ktx:$versions.room",
+            compiler: "androidx.room:room-compiler:$versions.room",
+    ]
+    yandex_authsdk = [
+            yandex_authsdk: "com.yandex.android:authsdk:$versions.yandex_authsdk"
+    ]
+    androidx = [
+            work                : "androidx.work:work-runtime-ktx:$versions.worker",
+            datastore           : "androidx.datastore:datastore-preferences:$versions.datastore",
+            databinding         : "androidx.databinding:databinding-common:$versions.databinding",
+            livedata_lifecycle  : "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle_livedata",
+            viewmodel_lifecycle : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle_viewmodel",
+            extensions_lifecycle: "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle_extensions",
+            common_lifecycle    : "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle_common",
+            runtime_lifecycle   : "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle_runtime",
+            core                : "androidx.core:core-ktx:$versions.core",
+            appcompat           : "androidx.appcompat:appcompat:$versions.appcompat",
+            constraintlayout    : "androidx.constraintlayout:constraintlayout:$versions.constraintlayout",
+            coordinatorlayout   : "androidx.coordinatorlayout:coordinatorlayout:$versions.coordinatorlayout",
+            legacy_support      : "androidx.legacy:legacy-support-v4:$versions.legacy_support",
+            espresso            : "androidx.test.espresso:espresso-core:$versions.espresso"
+    ]
+    google = [
+            material: "com.google.android.material:material:$versions.google_material"
+    ]
+    junit = [
+            androidx_junit: "androidx.test.ext:junit:$versions.androidx_junit",
+            junit         : "junit:junit:$versions.junit"
+    ]
+    coroutines = [
+            core   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines",
+            android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
+    ]
+    navigation = [
+            fragment: "androidx.navigation:navigation-fragment-ktx:$versions.navigate",
+            ui      : "androidx.navigation:navigation-fragment-ktx:$versions.navigate"
+    ]
+    di = [
+            dagger                : "com.google.dagger:dagger:$versions.dagger",
+            dagger_android_support: "com.google.dagger:dagger-android-support:$versions.dagger",
+            dagger_processor      : "com.google.dagger:dagger-android-processor:$versions.dagger",
+            dagger_compiler       : "com.google.dagger:dagger-compiler:$versions.dagger"
+    ]
+    okhttp3 = [
+            okhttp3    : "com.squareup.okhttp3:okhttp:$versions.okhttp3",
+            interceptor: "com.squareup.okhttp3:logging-interceptor:$versions.okhttp3"
+    ]
+    retrofit2 = [
+            retrofit2        : "com.squareup.retrofit2:retrofit:$versions.retrofit2",
+            converter_jackson: "com.squareup.retrofit2:converter-jackson:$versions.converter_jackson",
+            converter_scalars: "com.squareup.retrofit2:converter-scalars:$versions.converter_scalars",
+            converter_gson   : "com.squareup.retrofit2:converter-gson:$versions.converter_gson"
+    ]
+    animations = [
+            lottie  : "com.airbnb.android:lottie:$versions.lottie",
+            daimajia: "com.daimajia.androidanimations:library:$versions.daimajia"
+    ]
+    ktor = [
+            core         : "io.ktor:ktor-client-core:$versions.ktor", // impl
+            cio          : "io.ktor:ktor-client-cio:$versions.ktor", // impl
+            content      : "io.ktor:ktor-client-content-negotiation:$versions.ktor", // impl
+            serialization: "io.ktor:ktor-serialization-kotlinx-json:$versions.ktor", // impl
+            extra        : "org.slf4j:slf4j-nop:2.0.7" // impl
+    ]
+    json = [
+            gson   : "com.google.code.gson:gson:$versions.gson",
+            jackson: "com.fasterxml.jackson.module:jackson-module-kotlin:$versions.jackson" // impl
+    ]
+    compose = [
+            ui        : "androidx.compose.ui:ui:$versions.compose_version",
+            material  : "androidx.compose.material:material:$versions.compose_version",
+            material3 : "androidx.compose.material3:material3:$versions.compose_material3Version",
+            navigation: "androidx.navigation:navigation-compose:$versions.compose_navigationVersion",
+            lifecycle : "androidx.lifecycle:lifecycle-runtime-compose:$versions.compose_lifecycleRuntimeVersion",
+            ui_tooling: "androidx.compose.ui:ui-tooling:$versions.compose_ui_tooling"
+    ]
+    decorators = [
+            swipe: "it.xabaras.android:recyclerview-swipedecorator:$versions.swipe_decorator"
+    ]
+}

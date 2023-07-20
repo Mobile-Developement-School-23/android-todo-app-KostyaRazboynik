@@ -3,6 +3,7 @@ package com.kostyarazboynik.todoapp.ui.view.fragments.main
 import androidx.lifecycle.ViewModel
 import com.kostyarazboynik.todoapp.data.models.ToDoItem
 import com.kostyarazboynik.todoapp.data.repository.ToDoItemsRepositoryImpl
+import com.kostyarazboynik.todoapp.data.repository.internet_checker.ConnectivityObserver
 import com.kostyarazboynik.todoapp.data.repository.internet_checker.ConnectivityObserver.Status.Unavailable
 import com.kostyarazboynik.todoapp.data.repository.internet_checker.NetworkConnectivityObserver
 import com.kostyarazboynik.todoapp.domain.models.UiState
@@ -26,6 +27,7 @@ class MainViewModel @Inject constructor(
 
     private val _status = MutableStateFlow(Unavailable)
     val status = _status.asStateFlow()
+    private var internetState = status.value
 
     private val _visibility: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val visibility: StateFlow<Boolean> = _visibility
@@ -84,5 +86,23 @@ class MainViewModel @Inject constructor(
         coroutineScope.launch(Dispatchers.IO) {
             repository.updateToDoItem(toDoItem)
         }
+    }
+
+    fun updateInternetState() {
+        internetState = status.value
+    }
+
+    fun internetStateAvailable(): Boolean = internetState == ConnectivityObserver.Status.Available
+    fun checkInternetStateAvailable(status: ConnectivityObserver.Status): Boolean {
+        var flag = true
+        when (status) {
+            ConnectivityObserver.Status.Available -> if (internetState != status) {
+                //viewModel.loadNetworkList()
+            }
+            else -> if (internetState != status) flag = false
+        }
+
+        internetState = status
+        return flag
     }
 }

@@ -48,7 +48,7 @@ class ToDoItemViewHolder(private val binding: ToDoItemLayoutBinding) :
                         R.string.doItBefore,
                         todoItem.deadline.let {
                             SimpleDateFormat(
-                                "d MMMM",
+                                "d MMMM HH:mm",
                                 Locale.getDefault()
                             ).format(it!!)
                         })

@@ -6,6 +6,7 @@ import com.kostyarazboynik.todoapp.data.datasource.local.entity.ToDoItemEntity
 import com.kostyarazboynik.todoapp.data.datasource.remote.dto.ToDoItemNetworkEntity
 import com.kostyarazboynik.todoapp.data.models.Importance
 import com.kostyarazboynik.todoapp.data.models.ToDoItem
+import com.kostyarazboynik.todoapp.domain.notifications.NotificationMode
 import java.util.Date
 
 object Mappers {
@@ -83,4 +84,14 @@ object Mappers {
             context.getString(R.string.low_priority) -> Importance.LOW
             else -> Importance.NO
         }
+
+    fun NotificationMode.toOption(context: Context): String {
+        val options = context.resources.getStringArray(R.array.notification_labels)
+        return when (this) {
+            NotificationMode.DAY -> options[0]
+            NotificationMode.HOUR -> options[1]
+            NotificationMode.DEADLINE -> options[2]
+        }
+    }
+
 }

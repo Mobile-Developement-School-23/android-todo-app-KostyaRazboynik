@@ -1,5 +1,6 @@
 package com.kostyarazboynik.todoapp.ui.view.fragments.add.xml
 
+import android.app.TimePickerDialog
 import android.content.Context
 import android.view.View
 import android.widget.Toast
@@ -81,7 +82,7 @@ class AddViewController(
             navController.popBackStack()
         }
 
-    private fun setUpDatePicker() =
+    private fun setUpDatePicker() {
         datePicker.apply {
             addOnPositiveButtonClickListener {
                 createDate(it)
@@ -94,15 +95,32 @@ class AddViewController(
             }
         }
 
+    }
+
     private fun setUpDeadlineSwitch() =
         binding.deadlineSw.setOnClickListener {
             if (binding.deadlineSw.isChecked) {
                 binding.deadlineDate.visibility = View.VISIBLE
-                binding.deadlineDate.text =
-                    SimpleDateFormat("d MMMM y", Locale.getDefault()).format(Date())
                 showDateTimePicker()
             } else deleteDate()
         }
+
+    private fun showTimePicker(date: Date) = TimePickerDialog(
+        context,
+        R.style.MaterialCalendarTheme,
+        { _, hourOfDay, minute ->
+            deadlineDate = Date(date.time + hourOfDay * 3600000 + minute * 60000)
+
+            binding.deadlineDate.text =
+                SimpleDateFormat("d MMMM y HH:mm", Locale.getDefault()).format(deadlineDate!!)
+            deadlineChanged = true
+        }, 0, 0, true
+    ).apply {
+        setOnCancelListener {
+            deleteDate()
+        }
+        show()
+    }
 
     private fun createDate(it: Long) {
         val calendar = Calendar.getInstance()
@@ -114,11 +132,8 @@ class AddViewController(
         val date = calendar.time
 
         binding.deadlineDate.visibility = View.VISIBLE
-        binding.deadlineDate.text =
-            SimpleDateFormat("d MMMM y", Locale.getDefault()).format(date)
 
-        deadlineDate = date
-        deadlineChanged = true
+        showTimePicker(date)
     }
 
     private fun deleteDate() {

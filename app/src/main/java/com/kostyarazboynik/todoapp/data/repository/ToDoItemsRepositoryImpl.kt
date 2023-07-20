@@ -35,20 +35,20 @@ class ToDoItemsRepositoryImpl @Inject constructor(
 
     override suspend fun createToDoItem(toDoItem: ToDoItem) {
         toDoItemDao.createToDoItem(toDoItem.modelToEntity())
-        networkSource.createRemoteToDoItem(toDoItem)
         notificationsScheduler.schedule(toDoItem)
+        networkSource.createRemoteToDoItem(toDoItem)
     }
 
     override suspend fun deleteToDoItem(toDoItem: ToDoItem) {
         toDoItemDao.deleteToDoItem(toDoItem.modelToEntity())
-        networkSource.deleteRemoteToDoItem(toDoItem.id)
         notificationsScheduler.cancel(toDoItem.id)
+        networkSource.deleteRemoteToDoItem(toDoItem.id)
     }
 
     override suspend fun updateToDoItem(toDoItem: ToDoItem) {
         toDoItemDao.updateToDoItem(toDoItem.modelToEntity())
-        networkSource.updateRemoteToDoItem(toDoItem)
         notificationsScheduler.schedule(toDoItem)
+        networkSource.updateRemoteToDoItem(toDoItem)
     }
 
     override fun getRemoteToDoItemsFlow(): Flow<UiState<List<ToDoItem>>> = flow {
@@ -62,9 +62,9 @@ class ToDoItemsRepositoryImpl @Inject constructor(
                     DataState.Initial -> emit(UiState.Start)
                     is DataState.Exception -> emit(UiState.Error(state.cause.message.toString()))
                     is DataState.Result -> {
+                        updateNotifications(state.data)
                         toDoItemDao.mergeToDoItems(state.data.map { it.modelToEntity() })
                         emit(UiState.Success(state.data))
-                        updateNotifications(state.data)
                     }
                 }
             }
@@ -75,7 +75,7 @@ class ToDoItemsRepositoryImpl @Inject constructor(
 
     override suspend fun deleteCurrentToDoItems() = toDoItemDao.deleteAllToDoItems()
 
-    private fun updateNotifications(items: List<ToDoItem>) {
+    fun updateNotifications(items: List<ToDoItem>) {
         notificationsScheduler.cancelAll()
         for (item in items) notificationsScheduler.schedule(item)
     }

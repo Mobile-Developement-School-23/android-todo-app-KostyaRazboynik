@@ -20,6 +20,7 @@ class NotificationsSchedulerImpl @Inject constructor(
 
     companion object {
         const val ONE_HOUR_IN_MILLIS = 3600000L
+        const val ONE_DAY_IN_MILLIS = 86400000L
         const val INTENT_STRING_EXTRA_NAME = GLOBAL_INTENT_STRING_EXTRA_NAME
     }
 
@@ -37,17 +38,26 @@ class NotificationsSchedulerImpl @Inject constructor(
         } else cancel(item.id)
     }
 
-    private fun setAlarmManager(intent: Intent, item: ToDoItem) =
+    private fun setAlarmManager(intent: Intent, toDoItem: ToDoItem) =
         alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
-            item.deadline!!.time - ONE_HOUR_IN_MILLIS,
+            getNotificationTime(toDoItem),
             PendingIntent.getBroadcast(
                 context,
-                item.id.hashCode(),
+                toDoItem.id.hashCode(),
                 intent,
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
         )
+
+    private fun getNotificationTime(toDoItem: ToDoItem): Long {
+        val deadline = toDoItem.deadline!!.time
+        return when (sharedPreferences.getNotificationOption()) {
+            NotificationMode.HOUR -> deadline - ONE_HOUR_IN_MILLIS
+            NotificationMode.DAY -> deadline - ONE_DAY_IN_MILLIS
+            NotificationMode.DEADLINE -> deadline
+        }
+    }
 
     override fun cancel(id: String) {
         try {

@@ -2,6 +2,8 @@ package com.kostyarazboynik.todoapp.data.datasource
 
 
 import android.content.Context
+import com.kostyarazboynik.todoapp.domain.notifications.NotificationMode
+import com.kostyarazboynik.todoapp.utils.Constants.DAY_NOTICE
 import com.kostyarazboynik.todoapp.utils.Constants.NOTIFICATIONS_PERMISSION_KEY
 import com.kostyarazboynik.todoapp.utils.Constants.SHARED_PREFERENCES_NO_TOKEN
 import com.kostyarazboynik.todoapp.utils.Constants.THEME_FOLLOW_SYSTEM
@@ -37,10 +39,24 @@ class SharedPreferencesAppSettings @Inject constructor(
         if (!sharedPreferences.contains(SHARED_PREFERENCES_THEME_TAG))
             setTheme(THEME_FOLLOW_SYSTEM)
 
-        if(!sharedPreferences.contains(SHARED_PREFERENCES_NOTIFICATION_TAG))
+        if (!sharedPreferences.contains(SHARED_PREFERENCES_NOTIFICATION_TAG))
             editor.putString(SHARED_PREFERENCES_NOTIFICATION_TAG, "hey")
 
+        if (!sharedPreferences.contains(SHARED_PREFERENCES_NOTIFICATION_OPTION))
+            editor.putString(SHARED_PREFERENCES_NOTIFICATION_OPTION, DAY_NOTICE)
+
     }
+
+    fun setNotificationOption(option: NotificationMode) =
+        editor.putString(SHARED_PREFERENCES_NOTIFICATION_OPTION, option.toString().lowercase()).apply()
+
+    fun getNotificationOption(): NotificationMode =
+        NotificationMode.valueOf(
+            sharedPreferences.getString(
+                SHARED_PREFERENCES_NOTIFICATION_OPTION,
+                DAY_NOTICE
+            )!!.uppercase()
+        )
 
     fun setCurrentToken(token: String) =
         editor.putString(SHARED_PREFERENCES_TOKEN, token).apply()
@@ -56,7 +72,8 @@ class SharedPreferencesAppSettings @Inject constructor(
 
     fun getRevisionId(): Int = sharedPreferences.getInt(SHARED_PREFERENCES_REVISION_TAG, 1)
 
-    fun getTheme(): Int = sharedPreferences.getInt(SHARED_PREFERENCES_THEME_TAG, THEME_FOLLOW_SYSTEM)
+    fun getTheme(): Int =
+        sharedPreferences.getInt(SHARED_PREFERENCES_THEME_TAG, THEME_FOLLOW_SYSTEM)
 
     fun setTheme(theme: Int) =
         sharedPreferences.edit().putInt(SHARED_PREFERENCES_THEME_TAG, theme).apply()
@@ -95,5 +112,6 @@ class SharedPreferencesAppSettings @Inject constructor(
         const val SHARED_PREFERENCES_TOKEN = "current_token"
         const val SHARED_PREFERENCES_THEME_TAG = "theme"
         const val SHARED_PREFERENCES_NOTIFICATION_TAG = "notifications"
+        const val SHARED_PREFERENCES_NOTIFICATION_OPTION = "notification_option"
     }
 }

@@ -39,8 +39,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = DaggerAppComponent.factory().create(this)
-        appComponent.inject(this)
+        appComponent = DaggerAppComponent.factory().create(context = this)
+        appComponent.inject(app = this)
 
         periodicUpdate()
         setTheme()

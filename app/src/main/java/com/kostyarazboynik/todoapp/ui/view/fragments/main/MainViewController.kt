@@ -19,11 +19,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.kostyarazboynik.todoapp.R
 import com.kostyarazboynik.todoapp.data.models.ToDoItem
 import com.kostyarazboynik.todoapp.databinding.FragmentMainBinding
+import com.kostyarazboynik.todoapp.domain.models.UiState
 import com.kostyarazboynik.todoapp.ui.view.fragments.main.adapter.ToDoAdapter
 import com.kostyarazboynik.todoapp.ui.view.fragments.main.adapter.swipe.SwipeCallbackInterface
 import com.kostyarazboynik.todoapp.ui.view.fragments.main.adapter.swipe.SwipeHelper
-import com.kostyarazboynik.todoapp.data.repository.internet_checker.ConnectivityObserver
-import com.kostyarazboynik.todoapp.domain.models.UiState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -44,7 +43,6 @@ class MainViewController(
 ) {
 
     private val listAdapter: ToDoAdapter get() = binding.recyclerView.adapter as ToDoAdapter
-    private var internetState = viewModel.status.value
 
     fun setUpViews() {
         createListeners()
@@ -72,7 +70,8 @@ class MainViewController(
                 }
             }
         }
-        internetState = viewModel.status.value
+
+        viewModel.updateInternetState()
     }
 
 
@@ -88,7 +87,8 @@ class MainViewController(
         lifecycleOwner.lifecycleScope.launch {
             lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.status.collectLatest {
-                    updateNetworkState(it)
+                    if (!viewModel.checkInternetStateAvailable(it))
+                        makeToast(context.getString(R.string.lost_internet))
                 }
             }
         }
@@ -141,7 +141,7 @@ class MainViewController(
 
     private fun swipeRefreshListener() =
         binding.swipeLayout.setOnRefreshListener {
-            if (internetState == ConnectivityObserver.Status.Available) {
+            if (viewModel.internetStateAvailable()) {
                 viewModel.loadNetworkList()
 
                 makeSnackBar(context.getString(R.string.merging_data)).show()
@@ -180,15 +180,6 @@ class MainViewController(
             else binding.visibility.setImageResource(R.drawable.visibility)
         }
 
-    private fun updateNetworkState(status: ConnectivityObserver.Status) {
-        when (status) {
-            ConnectivityObserver.Status.Available -> if (internetState != status) {
-                //viewModel.loadNetworkList()
-            }
-            else -> if (internetState != status) makeToast(context.getString(R.string.lost_internet))
-        }
-        internetState = status
-    }
 
     private fun makeToast(text: String) = Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
 

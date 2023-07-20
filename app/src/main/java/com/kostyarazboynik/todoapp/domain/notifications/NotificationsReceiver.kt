@@ -67,6 +67,7 @@ class NotificationsReceiver : BroadcastReceiver() {
             )
             .setContentText(toDoItem.title)
             .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(deepLinkIntent(context, toDoItem.id))
             .addAction(
                 NotificationCompat.Action(

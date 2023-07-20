@@ -3,6 +3,7 @@ package com.kostyarazboynik.todoapp.ui.view.fragments.settings
 import android.content.Context
 import android.os.Build
 import android.view.ContextThemeWrapper
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.navigation.NavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.kostyarazboynik.todoapp.R
 import com.kostyarazboynik.todoapp.databinding.FragmentSettingsBinding
+import com.kostyarazboynik.todoapp.domain.notifications.NotificationMode
 import com.kostyarazboynik.todoapp.utils.Constants.THEME_FOLLOW_SYSTEM
 import com.kostyarazboynik.todoapp.utils.Constants.THEME_NIGHT_NO
 import com.kostyarazboynik.todoapp.utils.Constants.THEME_NIGHT_YES
@@ -38,17 +40,55 @@ class SettingsViewController(
         setUpCloseButton()
         collectAccountInfo()
         setUpPermissionBtn()
+        setUpNotificationOption()
+    }
+
+    private fun setUpNotificationOption() {
+        binding.notificationOption.setOnClickListener {
+
+            val notificationOptions = context.resources.getStringArray(R.array.notification_options)
+            val notificationLabels = context.resources.getStringArray(R.array.notification_labels)
+
+            val selectedIndex = notificationOptions.indexOf(viewModel.getLabel().toString().lowercase())
+
+            MaterialAlertDialogBuilder(
+                ContextThemeWrapper(context, R.style.AlertDialogCustom)
+            ).apply {
+                setSingleChoiceItems(notificationLabels, selectedIndex) { dialog, which ->
+                    viewModel.putThemeMode(notificationOptions[which])
+                    binding.notificationOption.text = context.getString(
+                        R.string.notification_option,
+                        viewModel.getOption(context)
+                    )
+                    binding.notificationOption.visibility = View.VISIBLE
+                    viewModel.updateNotificationIntents()
+                    dialog.dismiss()
+                }
+                show()
+                create()
+            }
+        }
     }
 
     private fun setUpPermissionBtn() {
         binding.autoDownloadSwitch.setOnCheckedChangeListener { _, checked ->
             binding.autoDownloadSwitch.isClickable = checked
-            if (!checked) viewModel.setNotificationPermission(false)
+            if (!checked) {
+                viewModel.setNotificationPermission(false)
+                binding.notificationOption.visibility = View.GONE
+            } else {
+                binding.notificationOption.text =
+                    context.getString(R.string.notification_option, viewModel.getOption(context))
+                binding.notificationOption.visibility = View.VISIBLE
+            }
         }
 
         if (viewModel.getNotificationPermission()) {
             binding.autoDownloadSwitch.isChecked = true
             binding.autoDownloadSwitch.isClickable = true
+            binding.notificationOption.text =
+                context.getString(R.string.notification_option, viewModel.getOption(context))
+            binding.notificationOption.visibility = View.VISIBLE
         }
 
         binding.autoDownload.setOnClickListener {
@@ -108,19 +148,20 @@ class SettingsViewController(
 
     private fun showSettingDialog() {
         MaterialAlertDialogBuilder(
-            ContextThemeWrapper(
-                context,
-                R.style.AlertDialogCustom
-            )
+            ContextThemeWrapper(context, R.style.AlertDialogCustom)
         )
             .setTitle(context.getString(R.string.permission_title))
             .setMessage(context.getString(R.string.permission_message))
             .setPositiveButton(context.getString(R.string.permission_yes)) { _, _ ->
                 viewModel.setNotificationPermission(true)
                 binding.autoDownloadSwitch.isChecked = true
+                binding.notificationOption.text =
+                    context.getString(R.string.notification_option, viewModel.getOption(context))
+                binding.notificationOption.visibility = View.VISIBLE
             }
             .setNegativeButton(context.getString(R.string.permission_no)) { _, _ ->
                 viewModel.setNotificationPermission(false)
+                binding.notificationOption.visibility = View.GONE
             }
             .show()
     }
